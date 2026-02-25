@@ -8,10 +8,11 @@ const WhatWeAreSection = () => {
       id="what-we-are"
       label="What We Are"
       variant="dark"
-      title="What We Are"
+      title=""
     >
       <div className="what-we-are__layout">
         <div className="what-we-are__copy">
+          <h2 className="content-section__title">What We Are</h2>
           <p>
             UPRI Seismo is the seismology and earthquake monitoring initiative
             of the University of the Philippines Resilience Institute, dedicated

@@ -6,7 +6,7 @@ const SectionLayout = ({ id, label, variant, title, children }) => {
       aria-label={label}
     >
       <div className="content-section__inner">
-        <h2 className="content-section__title">{title}</h2>
+        {title ? <h2 className="content-section__title">{title}</h2> : null}
         {children || <div className="content-section__slot" />}
       </div>
     </section>
