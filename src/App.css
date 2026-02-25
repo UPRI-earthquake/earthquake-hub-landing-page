@@ -453,6 +453,8 @@ h6 {
   height: auto;
   border-radius: 14px;
   display: block;
+}
+
 #projects .content-section__title {
   font-size: clamp(2rem, 8vw, 3rem);
   margin-bottom: clamp(1.4rem, 2vw, 2.2rem);
@@ -839,6 +841,8 @@ h6 {
 
   .station-view__info-card {
     justify-self: stretch;
+  }
+
   .project-card {
     grid-template-columns: 1fr;
   }
