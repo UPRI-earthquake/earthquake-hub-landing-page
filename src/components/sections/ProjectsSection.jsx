@@ -54,10 +54,11 @@ const ProjectsSection = () => {
         <div className="project-content">
           <h3 className="project-title">{currentProject.title}</h3>
           <p className="project-description">{currentProject.description}</p>
-          <button onClick={handleNext} className="next-btn" aria-label="Next project">
-            &#10095;
-          </button>
         </div>
+
+        <button onClick={handleNext} className="next-btn" aria-label="Next project">
+          &#10095;
+        </button>
 
       </div>
 

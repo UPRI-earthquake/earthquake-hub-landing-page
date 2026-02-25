@@ -2,6 +2,7 @@ import QQImg from "../assets/QQ-logo.png";
 import qq1 from "../assets/Student presentation.JPG";
 import qq2 from "../assets/GROUPPHOTO.jpg";
 import CSSNImg from "../assets/CSSN.png";
+import shakeTableImg from "../assets/SHAKETABLE.jpg";
 
 export const projects = [
   {
@@ -17,6 +18,12 @@ export const projects = [
     description:
       "In a significant step towards advancing earthquake research and enhancing risk management strategies, The UP Resilience Institute (UPRI), UP Diliman College of Engineering (UPD COE), UP Diliman College of Science (UPD CS), National Institute for Science and Mathematics Education Development (NISMED), National Institute of Geological Sciences (NIGS), and National Institute of Physics (NIP) joined forces to discuss the proposed earthquake research hub in UP Diliman, named UP TREMOR (Timely Research of Earthquakes for Management of Risks) on December 14, 2023, at the UPRI Training Room.",
     images: [CSSNImg],
-  }
+  },
+  {
+    id: 3,
+    title: "Shake Table",
+    description: "A small-scale seismic simulator that reproduces recorded earthquake data for structural testing and earthquake response analysis.",
+    images: [shakeTableImg],
+  },
 ];
 
