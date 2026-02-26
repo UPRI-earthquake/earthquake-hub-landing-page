@@ -455,6 +455,74 @@ h6 {
   display: block;
 }
 
+#team {
+  border-top: 2px solid #1aa347;
+}
+
+.team {
+  width: min(1120px, 100%);
+  margin: 0 auto;
+  padding: clamp(0.5rem, 1vw, 1rem) 0 clamp(0.8rem, 2vw, 1.8rem);
+}
+
+.team__header {
+  text-align: center;
+}
+
+.team__title {
+  margin: 0;
+  font-size: clamp(2rem, 5vw, 3.8rem);
+  line-height: 1.05;
+  font-weight: 700;
+}
+
+.team__subtitle {
+  margin: 0.8rem 0 0;
+  color: #ececec;
+  font-size: clamp(1rem, 1.5vw, 1.4rem);
+}
+
+.team__grid {
+  margin-top: clamp(2.2rem, 4vw, 3.6rem);
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: clamp(2.2rem, 4vw, 3.8rem) clamp(1rem, 2vw, 2rem);
+}
+
+.team__member {
+  grid-column: span 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.team__member:nth-child(4) {
+  grid-column: 2 / span 2;
+}
+
+.team__member:nth-child(5) {
+  grid-column: 4 / span 2;
+}
+
+.team__avatar {
+  width: clamp(140px, 16vw, 205px);
+  aspect-ratio: 1 / 1;
+  border-radius: 999px;
+  background: #e5e5e5;
+}
+
+.team__member h3 {
+  margin: clamp(1.1rem, 2vw, 1.6rem) 0 0;
+  font-size: clamp(1.2rem, 1.8vw, 1.95rem);
+  font-weight: 500;
+}
+
+.team__member p {
+  margin: 0.35rem 0 0;
+  font-size: clamp(1.2rem, 1.7vw, 1.8rem);
+}
+
 .footer {
   background: #3f3f3f;
 }
@@ -639,6 +707,20 @@ h6 {
     max-width: 100%;
   }
 
+
+  .team__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .team__member {
+    grid-column: span 1;
+  }
+
+  .team__member:nth-child(4),
+  .team__member:nth-child(5) {
+    grid-column: span 1;
+  }
+
   .footer__inner {
     min-height: auto;
     flex-direction: column;
@@ -649,3 +731,5 @@ h6 {
     text-align: left;
   }
 }
+
+
