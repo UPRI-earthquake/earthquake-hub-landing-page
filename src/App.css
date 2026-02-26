@@ -117,6 +117,10 @@ h6 {
   cursor: pointer;
 }
 
+.hero__nav-item--has-submenu {
+  position: relative;
+}
+
 .hero__nav-link {
   border: 0;
   padding: 0;
@@ -124,6 +128,45 @@ h6 {
   color: inherit;
   font: inherit;
   cursor: pointer;
+}
+
+.hero__submenu {
+  position: absolute;
+  top: calc(100% + 0.6rem);
+  left: 0;
+  min-width: 150px;
+  margin: 0;
+  padding: 0.45rem 0;
+  list-style: none;
+  display: none;
+  flex-direction: column;
+  gap: 0;
+  border-radius: 10px;
+  background: rgba(20, 20, 20, 0.95);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.3);
+}
+
+.hero__nav .hero__submenu {
+  display: none;
+}
+
+.hero__submenu.is-open {
+  display: flex;
+}
+
+.hero__submenu-link {
+  border: 0;
+  width: 100%;
+  padding: 0.6rem 0.95rem;
+  text-align: left;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.hero__submenu-link:hover {
+  background: rgba(255, 255, 255, 0.12);
 }
 
 .hero__menu-toggle {
@@ -1019,7 +1062,7 @@ h6 {
     margin-left: auto;
   }
 
-  .hero__nav.is-open ul {
+  .hero__nav.is-open #hero-mobile-menu {
     position: absolute;
     top: calc(100% - 0.2rem);
     left: 1rem;
@@ -1032,6 +1075,11 @@ h6 {
     border-radius: 12px;
     background: rgba(20, 20, 20, 0.95);
     box-shadow: 0 10px 24px rgba(0, 0, 0, 0.3);
+    max-height: calc(100vh - 6.5rem);
+    overflow-y: auto;
+    overflow-x: hidden;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
   }
 
   .hero__nav.is-open li {
@@ -1042,6 +1090,24 @@ h6 {
     width: 100%;
     text-align: left;
     padding: 0.75rem 1rem;
+  }
+
+  .hero__submenu {
+    position: static;
+    min-width: 0;
+    width: 100%;
+    padding: 0;
+    border-radius: 0;
+    box-shadow: none;
+    background: transparent;
+    max-height: none;
+    overflow: visible;
+  }
+
+  .hero__submenu-link {
+    width: 100%;
+    text-align: left;
+    padding: 0.65rem 1.8rem;
   }
 
   .hero__caption {
