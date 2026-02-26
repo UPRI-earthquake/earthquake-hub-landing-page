@@ -113,6 +113,31 @@ h6 {
   font-size: clamp(0.95rem, 1.4vw, 1.35rem);
 }
 
+.hero__nav li {
+  cursor: pointer;
+}
+
+.hero__nav-link {
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.hero__menu-toggle {
+  display: none;
+  border: 0;
+  border-radius: 10px;
+  padding: 0.55rem 0.85rem;
+  font: inherit;
+  font-weight: 600;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.12);
+  cursor: pointer;
+}
+
 .page-content {
   width: 100%;
 }
@@ -435,7 +460,7 @@ h6 {
   color: #f5fff5;
   font-size: clamp(1rem, 1.5vw, 1.25rem);
   cursor: pointer;
-  box-shadow: 0 7px 0 rgba(6, 72, 23, 0.45);
+  box-shadow: 0 7px 0 rgba(10, 30, 15, 0.45);
 }
 
 .station-view__info-card {
@@ -727,6 +752,80 @@ h6 {
   font-size: clamp(1.2rem, 1.7vw, 1.8rem);
 }
 
+#come-work-with-us {
+  background: #dcdcdc;
+  color: #000000;
+}
+
+#come-work-with-us .content-section__inner {
+  width: min(1180px, 100%);
+}
+
+.careers {
+  padding: clamp(0.75rem, 1.2vw, 1.5rem) 0 clamp(1.2rem, 2.4vw, 2.5rem);
+}
+
+.careers__header {
+  text-align: center;
+}
+
+.careers__title {
+  margin: 0;
+  font-size: clamp(2.2rem, 4.8vw, 4rem);
+  line-height: 1.05;
+  font-weight: 500;
+}
+
+.careers__subtitle {
+  margin: clamp(0.6rem, 1.2vw, 0.9rem) 0 0;
+  color: #737373;
+  font-size: clamp(1.25rem, 2.4vw, 3rem);
+  font-weight: 400;
+}
+
+.careers__grid {
+  margin-top: clamp(2rem, 4vw, 3.6rem);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1rem, 2vw, 2rem);
+}
+
+.career-card {
+  background: transparent;
+  box-shadow: 0 8px 14px rgba(0, 0, 0, 0.18);
+}
+
+.career-card__image {
+  height: clamp(180px, 21vw, 300px);
+  background: #cbcbcb;
+  display: grid;
+  place-items: center;
+  color: #111111;
+  font-size: clamp(1.6rem, 2.8vw, 2.8rem);
+  text-align: center;
+  padding: 1rem;
+}
+
+.career-card__body {
+  background: #01953c;
+  color: #f5fff8;
+  min-height: clamp(260px, 23vw, 360px);
+  padding: clamp(1.2rem, 2vw, 1.8rem) clamp(1.1rem, 1.8vw, 1.6rem);
+}
+
+.career-card__body h3 {
+  margin: 0;
+  font-size: clamp(1.3rem, 2vw, 2rem);
+  font-weight: 500;
+}
+
+.career-card__body p {
+  margin: clamp(1rem, 1.7vw, 1.4rem) 0 0;
+  max-width: 26ch;
+  font-size: clamp(1.1rem, 1.5vw, 1.85rem);
+  line-height: 1.25;
+}
+
 .footer {
   background: #3f3f3f;
 }
@@ -789,12 +888,21 @@ h6 {
   font-size: clamp(1rem, 1.4vw, 1.45rem);
 }
 
-.footer__dot {
-  width: 0.55rem;
-  height: 0.55rem;
-  border-radius: 999px;
-  background: #f5f5f5;
+.footer__icon {
+  width: 1.1rem;
+  height: 1.1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
+  line-height: 0;
+}
+
+.footer__icon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  fill: #f5f5f5;
 }
 
 .footer__cta {
@@ -808,23 +916,58 @@ h6 {
 
 @media (max-width: 900px) {
   .hero {
-    min-height: 100vh;
+    min-height: 72vh;
   }
 
   .hero__nav {
-    flex-direction: column;
-    align-items: flex-start;
-    padding-bottom: 3rem;
+    align-items: center;
+    padding: 1rem 1rem 0;
   }
 
   .hero__nav ul {
-    flex-wrap: wrap;
-    gap: 0.75rem 1.2rem;
+    display: none;
+  }
+
+  .hero__menu-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+  }
+
+  .hero__nav.is-open ul {
+    position: absolute;
+    top: calc(100% - 0.2rem);
+    left: 1rem;
+    right: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    padding: 0.5rem 0;
+    border-radius: 12px;
+    background: rgba(20, 20, 20, 0.95);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.3);
+  }
+
+  .hero__nav.is-open li {
+    width: 100%;
+  }
+
+  .hero__nav.is-open .hero__nav-link {
+    width: 100%;
+    text-align: left;
+    padding: 0.75rem 1rem;
   }
 
   .hero__caption {
-    top: 56%;
-    transform: translateY(-25%);
+    top: 52%;
+    transform: translateY(-20%);
+    max-width: min(92vw, 680px);
+  }
+
+  .hero__caption p {
+    margin: 1rem 0 1.35rem;
   }
 
   .hero__cta {
@@ -941,6 +1084,14 @@ h6 {
   .team__member:nth-child(5) {
     grid-column: span 1;
   }
+
+  .careers__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .career-card__body p {
+    max-width: 100%;
+  }
   .products-panel {
     border-radius: 38px 38px 0 0;
     margin-top: -0.9rem;
@@ -975,6 +1126,17 @@ h6 {
 
   .footer__cta {
     text-align: left;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero {
+    min-height: 64vh;
+  }
+
+  .hero__caption {
+    top: 50%;
+    transform: translateY(-18%);
   }
 }
 

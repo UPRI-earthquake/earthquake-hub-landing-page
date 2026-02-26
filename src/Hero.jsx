@@ -1,8 +1,19 @@
+import { useState } from 'react'
 import banner from './assets/qqbanner.JPG'
 
 const navItems = ['Projects', 'Teams', 'Station View', 'Products', 'Contact Us']
 
 const Hero = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+
+  const toggleMenu = () => {
+    setIsMenuOpen((open) => !open)
+  }
+
+  const closeMenu = () => {
+    setIsMenuOpen(false)
+  }
+
   return (
     <header className="hero">
       <figure className="hero__figure">
@@ -19,11 +30,28 @@ const Hero = () => {
         </figcaption>
       </figure>
 
-      <nav className="hero__nav" aria-label="Main navigation">
+      <nav
+        className={`hero__nav ${isMenuOpen ? 'is-open' : ''}`}
+        aria-label="Main navigation"
+      >
         <div className="hero__logo">SEISMO</div>
-        <ul>
+        <button
+          type="button"
+          className="hero__menu-toggle"
+          aria-expanded={isMenuOpen}
+          aria-controls="hero-mobile-menu"
+          onClick={toggleMenu}
+        >
+          Menu
+        </button>
+
+        <ul id="hero-mobile-menu">
           {navItems.map((item) => (
-            <li key={item}>{item}</li>
+            <li key={item}>
+              <button type="button" className="hero__nav-link" onClick={closeMenu}>
+                {item}
+              </button>
+            </li>
           ))}
         </ul>
       </nav>

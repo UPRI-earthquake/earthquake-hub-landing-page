@@ -4,8 +4,8 @@ const members = [
   { name: "Full Name Here", role: "Position" },
   { name: "Full Name Here", role: "Position" },
   { name: "Full Name Here", role: "Position" },
-  { name: "Full Name Here", role: "Position" },
-  { name: "Full Name Here", role: "Position" },
+  { name: "Full Name Here", role: "Intern" },
+  { name: "Full Name Here", role: "Intern" },
 ]
 
 const TeamSection = () => {
