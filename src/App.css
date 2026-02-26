@@ -162,6 +162,89 @@ h6 {
   color: #f2fff3;
 }
 
+#publications {
+  background-image: url("./assets/PublicationBG.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 0;
+  min-height: auto;
+}
+
+#publications .content-section__inner {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.publication-overlay {
+  width: 90%;
+  height: clamp(420px, 52vh, 580px);
+  background: rgba(43, 143, 51, 0.92);
+  padding: clamp(2rem, 3.5vw, 3.5rem) clamp(2rem, 4vw, 4rem);
+  border-top-right-radius: 60px;
+  border-bottom-right-radius: 60px;
+  box-shadow: 10px 0 30px rgba(0,0,0,0.2);
+  display: flex;
+  flex-direction: column;
+}
+
+.publication-overlay__title {
+  margin: 0 0 clamp(1rem, 2vw, 1.8rem) 0;
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: 0.02em;
+}
+
+.publication-overlay__list {
+  list-style: none;
+  margin: 0;
+  padding: 0 0.5rem 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.8rem, 1.4vw, 1.2rem);
+  overflow-y: auto;
+  flex: 1;
+}
+
+.publication-overlay__list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.publication-overlay__list::-webkit-scrollbar-track {
+  background: rgba(255,255,255,0.1);
+  border-radius: 3px;
+}
+
+.publication-overlay__list::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.35);
+  border-radius: 3px;
+}
+
+.publication-overlay__list::-webkit-scrollbar-thumb:hover {
+  background: rgba(255,255,255,0.55);
+}
+
+.publication-overlay__item {
+  font-size: clamp(0.78rem, 1.1vw, 0.95rem);
+  line-height: 1.5;
+  color: #f0f0f0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.publication-overlay__item-title {
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.publication-overlay__item-citation {
+  font-weight: 400;
+  color: #d9f0da;
+}
+
 #what-we-are .content-section__title {
   margin-bottom: clamp(1.4rem, 2vw, 2rem);
   font-size: clamp(2.2rem, 5vw, 3.8rem);
@@ -882,6 +965,13 @@ h6 {
     width: 44px;
     height: 44px;
     font-size: 2rem;
+  }
+
+  .publication-overlay {
+    width: 100%;
+    height: clamp(350px, 60vh, 480px);
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
   }
 
   .station-view__headline {
