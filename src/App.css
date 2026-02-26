@@ -556,7 +556,7 @@ h6 {
 
 .station-view__copy {
   color: #eff8ef;
-  max-width: 700px;
+  max-width: 100%;
 }
 
 .station-view__eyebrow {
