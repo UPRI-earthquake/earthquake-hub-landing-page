@@ -30,7 +30,7 @@ const ContactIcon = ({ type }) => {
 
 const Footer = () => {
   return (
-    <footer className="footer">
+    <footer id="contact-us" className="footer">
       <div className="footer__inner">
         <section className="footer__left" aria-label="Contact details">
           <div className="footer__brand">
