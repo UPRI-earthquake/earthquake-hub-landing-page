@@ -700,11 +700,64 @@ h6 {
   border-radius: clamp(34px, 7vw, 52px) clamp(34px, 7vw, 52px) 0 0;
   padding: clamp(2.4rem, 4vw, 3.2rem) clamp(1.2rem, 4vw, 3.4rem)
     clamp(1.5rem, 3vw, 2.8rem);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(2.2rem, 4vw, 3.2rem);
+  width: 100%;
+}
+
+.station-view__bottom-row {
+  width: 100%;
+}
+
+.station-view__bottom-row--primary,
+.station-view__bottom-row--station-data {
   display: grid;
   grid-template-columns: minmax(260px, 1fr) minmax(220px, 360px);
   gap: clamp(1.6rem, 3vw, 3.2rem);
   align-items: center;
-  width: 100%;
+}
+
+.station-view__bottom-row--station-data {
+  grid-template-columns: minmax(220px, 420px) minmax(280px, 1fr);
+}
+
+.station-view__bottom-row--significant {
+  display: grid;
+  grid-template-columns: minmax(260px, 1fr) minmax(220px, 600px);
+  gap: clamp(1.6rem, 3vw, 3.2rem);
+  align-items: center;
+}
+
+.station-view__bottom-row--cta {
+  display: flex;
+  justify-content: center;
+}
+
+.station-view__bottom-row--docs {
+  display: grid;
+  justify-items: center;
+  gap: 0.35rem;
+}
+
+.station-view__docs-label {
+  margin: 0;
+  color: #d9f6de;
+  font-weight: 600;
+  font-size: clamp(0.95rem, 1.3vw, 1.1rem);
+  letter-spacing: 0.01em;
+}
+
+.station-view__docs-link {
+  color: #f2fff5;
+  font-size: clamp(0.95rem, 1.25vw, 1.08rem);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  word-break: break-word;
+}
+
+.station-view__docs-link:hover {
+  color: #ffffff;
 }
 
 .station-view__copy {
@@ -716,12 +769,19 @@ h6 {
   margin: 0;
   font-size: clamp(0.85rem, 1.2vw, 1rem);
   opacity: 0.92;
+  color: #eff8ef;
 }
 
 .station-view__copy h4 {
   margin: clamp(3rem, 7vw, 6.5rem) 0 1rem;
   font-size: clamp(1.7rem, 3.2vw, 2.6rem);
   line-height: 1.1;
+}
+
+.station-view__copy h4 span {
+  color: #7cff8c;
+  font-weight: 800;
+  text-shadow: 0 1px 0 rgba(5, 38, 14, 0.25);
 }
 
 .station-view__copy p {
@@ -731,15 +791,25 @@ h6 {
 }
 
 .station-view__cta {
+  font-family: "Poppins", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   margin-top: clamp(1.2rem, 2.5vw, 2rem);
   border: 0;
-  border-radius: 10px;
-  padding: 0.75rem 1.45rem;
+  border-radius: 12px;
+  padding: clamp(0.9rem, 1.6vw, 1.1rem) clamp(1.9rem, 3.2vw, 2.6rem);
   background: #05681f;
   color: #f5fff5;
-  font-size: clamp(1rem, 1.5vw, 1.25rem);
+  font-size: clamp(1.1rem, 1.8vw, 1.45rem);
+  font-weight: 600;
+  letter-spacing: 0.01em;
   cursor: pointer;
-  box-shadow: 0 7px 0 rgba(10, 30, 15, 0.45);
+  box-shadow: 0 9px 0 rgba(10, 30, 15, 0.42), 0 12px 20px rgba(0, 0, 0, 0.18);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.station-view__cta:hover {
+  transform: translateY(-2px);
+  background: #067625;
+  box-shadow: 0 11px 0 rgba(10, 30, 15, 0.42), 0 14px 24px rgba(0, 0, 0, 0.2);
 }
 
 .station-view__info-card {
@@ -757,6 +827,43 @@ h6 {
   height: auto;
   border-radius: 14px;
   display: block;
+}
+
+.station-view__feature-image-card {
+  width: 100%;
+  max-width: 420px;
+  background: #d7dde1;
+  border-radius: 18px;
+  padding: 0.7rem;
+  box-shadow: 0 6px 0 rgba(0, 0, 0, 0.3);
+}
+
+.station-view__feature-image {
+  width: 100%;
+  height: auto;
+  border-radius: 14px;
+  display: block;
+}
+
+.station-view__feature-copy {
+  color: #eff8ef;
+}
+
+.station-view__feature-copy h5 {
+  margin: 0;
+  font-size: clamp(1.7rem, 3vw, 2.4rem);
+  line-height: 1.08;
+}
+
+.station-view__feature-copy p {
+  margin: 0.8rem 0 0;
+  font-size: clamp(1rem, 1.5vw, 1.35rem);
+  line-height: 1.45;
+  /* max-width: 36ch; */
+}
+
+.station-view__feature-image-card--significant {
+  max-width: 600px;
 }
 #projects .content-section__title {
   font-size: clamp(2rem, 8vw, 3rem);
@@ -1348,8 +1455,23 @@ h6 {
   }
 
   .station-view__bottom {
-    grid-template-columns: 1fr;
     border-radius: 30px 30px 0 0;
+  }
+
+  .station-view__bottom-row--primary,
+  .station-view__bottom-row--station-data,
+  .station-view__bottom-row--significant {
+    grid-template-columns: 1fr;
+  }
+
+  .station-view__info-card,
+  .station-view__feature-image-card {
+    justify-self: start;
+    max-width: 100%;
+  }
+
+  .station-view__feature-copy p {
+    max-width: 100%;
   }
 
   .station-view__top {

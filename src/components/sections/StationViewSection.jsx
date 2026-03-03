@@ -3,6 +3,8 @@ import SectionLayout from "./SectionLayout"
 import stationImage from "../../assets/station.png"
 import eqInfoImage from "../../assets/eqinfo.PNG"
 import stationDataImage from "../../assets/stationdata.png"
+import stationDataFullImage from "../../assets/stationdatafull.png"
+import significantEarthquakesImage from "../../assets/significantearthquakes.PNG"
 
 const StationViewSection = () => {
   const [selected, setSelected] = useState(null)
@@ -37,7 +39,7 @@ const StationViewSection = () => {
           <h3 className="station-view__headline">
             Earthquake Data For All <span>Filipino Citizens</span>
           </h3>
-          <p className="station-view__subhead">UPRI Earthquake Hub</p>
+          <p className="station-view__subhead">SEISMO</p>
 
           <div className="station-view__callout">
             Information at your fingertips/mouse
@@ -116,15 +118,16 @@ const StationViewSection = () => {
         </div>
 
         <div className="station-view__bottom">
+          <p className="station-view__eyebrow">https://earthquake.science.upd.edu.ph/</p>
+          <div className="station-view__bottom-row station-view__bottom-row--primary">
           <div className="station-view__copy">
-            <p className="station-view__eyebrow">https://earthquake.science.upd.edu.ph/</p>
-            <h4>Powered by Data. Built for Resilience.</h4>
+            
+            <h4>
+              Powered by <span>Data</span>. Built for <span>Resilience</span>.
+            </h4>
             <p>
                 UPRI Earthquake Hub connects a growing network of seismic sensors across the country, transforming real-time ground motion into clear, accessible information. More than a monitoring platform, it is a commitment to making earthquake data openly available and understandable to all Filipino citizens—strengthening awareness, and a culture of resilience nationwide.
             </p>
-            <button onClick={handleClick} type="button" className="station-view__cta">
-              See it in action &#8594;
-            </button>
           </div>
 
           <div className="station-view__info-card">
@@ -133,6 +136,58 @@ const StationViewSection = () => {
               alt="Earthquake information detail card"
               className="station-view__info-image"
             />
+          </div>
+          </div>
+
+          <div className="station-view__bottom-row station-view__bottom-row--station-data">
+            <div className="station-view__feature-image-card">
+              <img
+                src={stationDataFullImage}
+                alt="Station data full view card"
+                className="station-view__feature-image"
+              />
+            </div>
+            <div className="station-view__feature-copy">
+              <h5>Real-time data for seismic stations</h5>
+              <p>
+                Station Data provides a focused look into live waveform readings, making it easier to inspect sensor behavior and monitor seismic trends in near real time.
+              </p>
+            </div>
+          </div>
+
+          <div className="station-view__bottom-row station-view__bottom-row--significant">
+
+            <div className="station-view__feature-copy">
+              <h5>Some Earthquakes Are Just More Special</h5>
+              <p>
+                Significant Earthquakes highlights the most impactful recent events in a single view so users can quickly scan magnitudes, locations, and key details for rapid situational awareness.
+              </p>
+            </div>
+                        <div className="station-view__feature-image-card station-view__feature-image-card--significant">
+              <img
+                src={significantEarthquakesImage}
+                alt="Significant earthquakes panel view"
+                className="station-view__feature-image"
+              />
+            </div>
+          </div>
+
+          <div className="station-view__bottom-row station-view__bottom-row--cta">
+            <button onClick={handleClick} type="button" className="station-view__cta">
+              See it in action &#8594;
+            </button>
+          </div>
+
+          <div className="station-view__bottom-row station-view__bottom-row--docs">
+            <p className="station-view__docs-label">Documentation</p>
+            <a
+              className="station-view__docs-link"
+              href="https://upri-earthquake.github.io/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              https://upri-earthquake.github.io/
+            </a>
           </div>
         </div>
       </div>
