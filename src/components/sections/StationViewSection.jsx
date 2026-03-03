@@ -1,8 +1,20 @@
+import { useState } from "react"
 import SectionLayout from "./SectionLayout"
 import stationImage from "../../assets/station.png"
 import eqInfoImage from "../../assets/eqinfo.PNG"
+import stationDataImage from "../../assets/stationdata.png"
 
 const StationViewSection = () => {
+  const [selected, setSelected] = useState(null)
+
+  const descriptions = {
+    events:
+      "Clicking the events beacon will show recent earthquake activity pulled directly from the live network.",
+    map:
+      "The map beacon points to the interactive station map where you can zoom and pan across the Philippine archipelago.",
+    legend:
+      "Legend explains the color coding used on the display so users can quickly interpret magnitudes and depths."
+  }
 
   const handleClick = () => {
     window.open('https://earthquake.science.upd.edu.ph/')
@@ -26,12 +38,64 @@ const StationViewSection = () => {
             Information at your fingertips/mouse
           </div>
 
-          <div className="station-view__main-shot-wrap">
+          <div
+            className="station-view__main-shot-wrap"
+            onClick={() => setSelected(null)}
+          >
             <img
               src={stationImage}
               alt="UPRI Earthquake Hub map interface"
               className="station-view__main-shot"
             />
+            {/* interactive beacons */}
+            <button
+              type="button"
+              className="station-view__beacon station-view__beacon--events"
+              aria-label="Events feature"
+              onClick={e => {
+                e.stopPropagation()
+                setSelected("events")
+              }}
+            />
+            <button
+              type="button"
+              className="station-view__beacon station-view__beacon--map"
+              aria-label="Map feature"
+              onClick={e => {
+                e.stopPropagation()
+                setSelected("map")
+              }}
+            />
+            <button
+              type="button"
+              className="station-view__beacon station-view__beacon--legend"
+              aria-label="Legend feature"
+              onClick={e => {
+                e.stopPropagation()
+                setSelected("legend")
+              }}
+            />
+
+            {selected && (
+              <div className={`station-view__popover station-view__popover--${selected}`}>
+                <button
+                  type="button"
+                  className="station-view__popover-close"
+                  onClick={() => setSelected(null)}
+                  aria-label="Close description"
+                >
+                  ×
+                </button>
+                <p>{descriptions[selected]}</p>
+                {selected === "map" && (
+                  <img
+                    src={stationDataImage}
+                    alt="Station waveform snapshot"
+                    className="station-view__popover-image"
+                  />
+                )}
+              </div>
+            )}
           </div>
         </div>
 
