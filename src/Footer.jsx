@@ -55,7 +55,7 @@ const Footer = () => {
           </ul>
         </section>
 
-        <p className="footer__cta">Reach out to us today</p>
+        <p className="footer__cta">Your Gateway to Seismic Resilience</p>
       </div>
     </footer>
   )
