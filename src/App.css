@@ -598,6 +598,11 @@ h6 {
   top: 72.3%;
 }
 
+.station-view__beacon--significant {
+  left: 8.2%;
+  top: 93.4%;
+}
+
 @keyframes stationBeaconWave {
   0% {
     transform: scale(0.72);
@@ -668,6 +673,12 @@ h6 {
   top: 69%;
   left: 84%;
   transform: translate(-100%, -100%);
+}
+
+.station-view__popover--significant {
+  top: 90%;
+  left: 17%;
+  transform: translate(-6%, -100%);
 }
 
 .station-view__popover-close {
@@ -1361,6 +1372,11 @@ h6 {
     top: 73%;
   }
 
+  .station-view__beacon--significant {
+    left: 11%;
+    top: 93%;
+  }
+
   .station-view__popover {
     max-width: min(36ch, 72vw);
   }
@@ -1381,6 +1397,12 @@ h6 {
     top: 70%;
     left: 82%;
     transform: translate(-96%, -104%);
+  }
+
+  .station-view__popover--significant {
+    top: 88%;
+    left: 23%;
+    transform: translate(-8%, -104%);
   }
 
   .station-view__copy h4 {

@@ -13,7 +13,9 @@ const StationViewSection = () => {
     map:
       "The map beacon points to the interactive station map where you can zoom and pan across the Philippine archipelago.",
     legend:
-      "Legend explains the color coding used on the display so users can quickly interpret magnitudes and depths."
+      "Legend explains the color coding used on the display so users can quickly interpret magnitudes and depths.",
+    significant:
+      "Significant Earthquakes highlights major seismic events so users can quickly focus on high-impact activity."
   }
 
   const handleClick = () => {
@@ -73,6 +75,15 @@ const StationViewSection = () => {
               onClick={e => {
                 e.stopPropagation()
                 setSelected("legend")
+              }}
+            />
+            <button
+              type="button"
+              className="station-view__beacon station-view__beacon--significant"
+              aria-label="Significant earthquakes feature"
+              onClick={e => {
+                e.stopPropagation()
+                setSelected("significant")
               }}
             />
 
