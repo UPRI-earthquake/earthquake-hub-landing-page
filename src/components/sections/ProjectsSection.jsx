@@ -3,14 +3,15 @@ import { useState } from "react"
 import { projects } from "../../data/projects"
 
 const ProjectsSection = () => {
-  const [selectedProject, setSelectedProject] = useState(null)
+  const [selectedId, setSelectedId] = useState(null)
 
-  const handleCardClick = (project) => {
-    setSelectedProject(project)
+  const handleCardClick = (projectId) => {
+    setSelectedId(projectId)
   }
 
-  const handleBackClick = () => {
-    setSelectedProject(null)
+  const handleBackClick = (e) => {
+    e.stopPropagation()
+    setSelectedId(null)
   }
 
   const handleLinkClick = (e, project) => {
@@ -31,10 +32,10 @@ const ProjectsSection = () => {
       variant="light"
       title="Projects"
     >
-      {selectedProject ? (
-        <div className="projects-expanded">
+      <div className={`projects-container ${selectedId ? "has-selection" : ""}`}>
+        {selectedId && (
           <button
-            className="projects-back-btn"
+            className="project-back-btn"
             onClick={handleBackClick}
             aria-label="Back to projects"
           >
@@ -54,60 +55,62 @@ const ProjectsSection = () => {
               />
             </svg>
           </button>
+        )}
 
-          <div className="project-expanded-card">
-            <div className="project-expanded-header">
-              <img
-                src={selectedProject.images}
-                alt={selectedProject.title}
-                className="project-expanded-image"
-              />
-              <h3 className="project-expanded-title">
-                What is {selectedProject.title}?
-              </h3>
-            </div>
-            <p className="project-expanded-description">
-              {selectedProject.description}
-            </p>
-            <a
-              href={selectedProject.linkHref}
-              className="project-expanded-link"
-              target={selectedProject.isInternalLink ? "_self" : "_blank"}
-              rel={selectedProject.isInternalLink ? "" : "noopener noreferrer"}
-              onClick={(e) => handleLinkClick(e, selectedProject)}
-            >
-              {selectedProject.linkText} <span className="link-arrow">→</span>
-            </a>
-          </div>
-        </div>
-      ) : (
-        <div className="projects-grid">
-          {projects.map((project) => (
+        {projects.map((project) => {
+          const isSelected = selectedId === project.id
+          const isHidden = selectedId && !isSelected
+
+          return (
             <div
               key={project.id}
-              className="project-card-item"
-              onClick={() => handleCardClick(project)}
+              className={`project-card-item ${isSelected ? "project-card-item--expanded" : ""} ${isHidden ? "project-card-item--hidden" : ""}`}
+              onClick={() => !isSelected && handleCardClick(project.id)}
               role="button"
-              tabIndex={0}
+              tabIndex={isHidden ? -1 : 0}
               onKeyDown={(e) => {
-                if (e.key === "Enter" || e.key === " ") {
-                  handleCardClick(project)
+                if ((e.key === "Enter" || e.key === " ") && !isSelected) {
+                  handleCardClick(project.id)
                 }
               }}
             >
-              <div className="project-card-image-container">
-                <img
-                  src={project.images}
-                  alt={project.title}
-                  className="project-card-image"
-                />
+              <div className="project-card-header">
+                <div className="project-card-image-container">
+                  <img
+                    src={project.images}
+                    alt={project.title}
+                    className="project-card-image"
+                  />
+                </div>
+                <h3 className="project-card-title">
+                  {isSelected ? `What is ${project.title}?` : project.title}
+                </h3>
               </div>
-              <h3 className="project-card-title">{project.title}</h3>
-              <p className="project-card-keywords">{project.keywords}</p>
+
+              {!isSelected && (
+                <p className="project-card-keywords">{project.keywords}</p>
+              )}
+
+              {isSelected && (
+                <div className="project-card-details">
+                  <p className="project-card-description">
+                    {project.description}
+                  </p>
+                  <a
+                    href={project.linkHref}
+                    className="project-card-link"
+                    target={project.isInternalLink ? "_self" : "_blank"}
+                    rel={project.isInternalLink ? "" : "noopener noreferrer"}
+                    onClick={(e) => handleLinkClick(e, project)}
+                  >
+                    {project.linkText} <span className="link-arrow">→</span>
+                  </a>
+                </div>
+              )}
             </div>
-          ))}
-        </div>
-      )}
+          )
+        })}
+      </div>
     </SectionLayout>
   )
 }
