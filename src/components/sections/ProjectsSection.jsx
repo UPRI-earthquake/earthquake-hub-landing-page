@@ -1,54 +1,28 @@
 import SectionLayout from "./SectionLayout"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { projects } from "../../data/projects"
 
 const ProjectsSection = () => {
-  const [currentIndex, setCurrentIndex] = useState(0)
-  const [currentVariantIndex, setCurrentVariantIndex] = useState(0)
-  const [currentImageIndex, setCurrentImageIndex] = useState(0)
+  const [selectedId, setSelectedId] = useState(null)
 
-  const handleNext = () => {
-  if (currentIndex === projects.length - 1) {
-    setCurrentIndex(0);
-  } else {
-    setCurrentIndex(currentIndex + 1);
+  const handleCardClick = (projectId) => {
+    setSelectedId(projectId)
   }
-};
 
-  const currentProject = projects[currentIndex]
-  const projectVariants = currentProject.variants?.length ? currentProject.variants : []
-  const activeVariant = projectVariants[currentVariantIndex]
+  const handleBackClick = (e) => {
+    e.stopPropagation()
+    setSelectedId(null)
+  }
 
-  const projectImages = activeVariant?.images?.length
-    ? activeVariant.images
-    : currentProject.images?.length
-      ? currentProject.images
-      : currentProject.image
-        ? [currentProject.image]
-        : []
-
-  const projectDescription = activeVariant?.description || currentProject.description
-
-  useEffect(() => {
-    setCurrentVariantIndex(0)
-    setCurrentImageIndex(0)
-  }, [currentIndex])
-
-  useEffect(() => {
-    if (projectImages.length <= 1) {
-      return
+  const handleLinkClick = (e, project) => {
+    e.stopPropagation()
+    if (project.isInternalLink) {
+      e.preventDefault()
+      const element = document.querySelector(project.linkHref)
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" })
+      }
     }
-
-    const intervalId = setInterval(() => {
-      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % projectImages.length)
-    }, 2500)
-
-    return () => clearInterval(intervalId)
-  }, [projectImages.length])
-
-  const handleVariantChange = (variantIndex) => {
-    setCurrentVariantIndex(variantIndex)
-    setCurrentImageIndex(0)
   }
 
   return (
@@ -58,40 +32,85 @@ const ProjectsSection = () => {
       variant="light"
       title="Projects"
     >
-      <div className="project-card">
-        <img
-          src={projectImages[currentImageIndex]}
-          alt={currentProject.title}
-          className="project-image"
-        />
+      <div className={`projects-container ${selectedId ? "has-selection" : ""}`}>
+        {selectedId && (
+          <button
+            className="project-back-btn"
+            onClick={handleBackClick}
+            aria-label="Back to projects"
+          >
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M15 18L9 12L15 6"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </button>
+        )}
 
-        <div className="project-content">
-          <h3 className="project-title">{currentProject.title}</h3>
+        {projects.map((project) => {
+          const isSelected = selectedId === project.id
+          const isHidden = selectedId && !isSelected
 
-          {projectVariants.length > 1 && (
-            <div className="project-variants" aria-label="Project versions">
-              {projectVariants.map((variant, variantIndex) => (
-                <button
-                  key={`${currentProject.id}-${variant.type}`}
-                  type="button"
-                  className={`project-variant-btn ${variantIndex === currentVariantIndex ? "project-variant-btn--active" : ""}`}
-                  onClick={() => handleVariantChange(variantIndex)}
-                >
-                  {variant.type}
-                </button>
-              ))}
+          return (
+            <div
+              key={project.id}
+              className={`project-card-item ${isSelected ? "project-card-item--expanded" : ""} ${isHidden ? "project-card-item--hidden" : ""}`}
+              onClick={() => !isSelected && handleCardClick(project.id)}
+              role="button"
+              tabIndex={isHidden ? -1 : 0}
+              onKeyDown={(e) => {
+                if ((e.key === "Enter" || e.key === " ") && !isSelected) {
+                  handleCardClick(project.id)
+                }
+              }}
+            >
+              <div className="project-card-header">
+                <div className="project-card-image-container">
+                  <img
+                    src={project.images}
+                    alt={project.title}
+                    className="project-card-image"
+                  />
+                </div>
+                <h3 className="project-card-title">
+                  {isSelected ? `What is ${project.title}?` : project.title}
+                </h3>
+              </div>
+
+              {!isSelected && (
+                <p className="project-card-keywords">{project.keywords}</p>
+              )}
+
+              {isSelected && (
+                <div className="project-card-details">
+                  <p className="project-card-description">
+                    {project.description}
+                  </p>
+                  <a
+                    href={project.linkHref}
+                    className="project-card-link"
+                    target={project.isInternalLink ? "_self" : "_blank"}
+                    rel={project.isInternalLink ? "" : "noopener noreferrer"}
+                    onClick={(e) => handleLinkClick(e, project)}
+                  >
+                    {project.linkText} <span className="link-arrow">→</span>
+                  </a>
+                </div>
+              )}
             </div>
-          )}
-
-          <p className="project-description">{projectDescription}</p>
-        </div>
-
-        <button onClick={handleNext} className="next-btn" aria-label="Next project">
-          &#10095;
-        </button>
-
+          )
+        })}
       </div>
-
     </SectionLayout>
   )
 }
