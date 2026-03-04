@@ -11,10 +11,10 @@ const PageContent = () => {
   return (
     <main className="page-content">
       <WhatWeAreSection />
+      <StationViewSection />
       <ProjectsSection />
       <ProductsSection />
       <CommunitySection />
-      <StationViewSection />
       <TeamSection />
       <ComeWorkWithUsSection />
       <PublicationsSection />
