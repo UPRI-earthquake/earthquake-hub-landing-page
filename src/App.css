@@ -384,72 +384,113 @@ h6 {
   color: #d9f0da;
 }
 
-#what-we-are .content-section__title {
-  margin-bottom: clamp(1.4rem, 2vw, 2rem);
-  font-size: clamp(2.2rem, 5vw, 3.8rem);
+#what-we-are {
+  background: #f4f4f4;
+  color: #1f1f1f;
+  min-height: auto;
+  padding-top: clamp(1.5rem, 4vw, 3.2rem);
+  padding-bottom: clamp(2.5rem, 5vw, 4rem);
+  overflow: hidden;
 }
 
+/* #what-we-are .content-section__inner {
+  max-width: min(1180px, 97vw);
+} */
+
 .what-we-are__layout {
-  display: grid;
-  grid-template-columns: minmax(280px, 1fr) minmax(340px, 1fr);
-  align-items: start;
-  gap: clamp(2rem, 4vw, 4.5rem);
+  position: relative;
+  min-height: clamp(1300px, 175vw, 1980px);
+  padding: clamp(0.3rem, 1vw, 1rem) 0 clamp(1rem, 3vw, 2rem);
+  /* overflow: hidden; */
+  width: 100%;
+}
+
+.what-we-are__heading {
+  position: relative;
+  margin: 0;
+  text-align: center;
+  font-size: clamp(2rem, 4.8vw, 3.2rem);
+  font-weight: 700;
+  color: #1f1f1f;
+  z-index: 2;
 }
 
 .what-we-are__copy {
-  max-width: 700px;
+  position: absolute;
+  top: clamp(120px, 20vw, 300px);
+  left: clamp(0.8rem, 12vw, 3rem);
+  z-index: 2;
 }
 
-.what-we-are__copy p {
+.what-we-are__card-title {
+  margin: 0 0 0.8rem;
+  color: #f5f5f5;
+  font-size: clamp(2rem, 2.8vw, 2.6rem);
+  font-weight: 600;
+  line-height: 1.05;
+}
+
+.what-we-are__card p {
   margin: 0;
-  font-size: clamp(1rem, 1.6vw, 2.6rem);
-  line-height: 1.45;
+  font-size: clamp(1.25rem, 1.55vw, 1.6rem);
+  line-height: 1.4;
   color: #f4f4f4;
 }
 
-.what-we-are__copy p + p {
-  margin-top: clamp(1rem, 1.6vw, 2rem);
+.what-we-are__card {
+  background: rgba(62, 62, 62, 0.72);
+  border-radius: 14px;
+  padding: clamp(1.45rem, 2.2vw, 2.05rem);
+  position: absolute;
+  z-index: 2;
+  width: min(74vw, 920px);
+  /* min-width: clamp(180px, 20vw, 120px); */
+  height: auto;
+  min-height: clamp(210px, 17vw, 560px);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  justify-content: center;
+}
+
+.what-we-are__card--mid {
+  top: clamp(520px, 52vw, 760px);
+  right: clamp(2.2rem, 12vw, 2.2rem);
+}
+
+.what-we-are__card--bottom {
+  top: clamp(920px, 90vw, 1320px);
+  left: clamp(0.8rem, 4vw, 3rem);
+}
+
+.what-we-are__map-bg {
+  position: absolute;
+  top: clamp(-120px, -8vw, -36px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: clamp(1320px, 192vw, 2300px);
+  max-width: none;
+  height: auto;
+  opacity: 0.95;
+  z-index: 1;
+  pointer-events: none;
 }
 
 .what-we-are__visual {
-  position: relative;
-  min-height: clamp(300px, 38vw, 520px);
-  transform: translateY(clamp(-16px, -1.8vw, -30px));
-}
-
-.what-we-are__accent {
   position: absolute;
-  top: 6%;
-  right: 7%;
-  width: clamp(70px, 10vw, 120px);
-  aspect-ratio: 1;
-  border-radius: 16px;
-  background: #29b53c;
+  top: clamp(150px, 12.5vw, 190px);
+  left: clamp(340px, 41vw, 560px);
+  z-index: 2;
+  width: min(36vw, 340px);
 }
 
 .what-we-are__image {
-  position: absolute;
   display: block;
   width: 100%;
-  height: auto;
+  height: clamp(150px, 16vw, 240px);
   object-fit: cover;
-  border-radius: 12px;
-}
-
-.what-we-are__image--front {
-  z-index: 2;
-  top: 15%;
-  left: 0;
-  max-width: clamp(310px, 34vw, 520px);
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.34);
-}
-
-.what-we-are__image--back {
-  z-index: 1;
-  right: 0;
-  bottom: 0;
-  max-width: clamp(230px, 22vw, 360px);
-  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.26);
+  border-radius: 4px;
 }
 
 #community .content-section__title {
@@ -1456,27 +1497,64 @@ h6 {
     min-height: auto;
   }
 
-  #what-we-are .content-section__title {
-    font-size: clamp(2rem, 8vw, 3rem);
+  .what-we-are__layout {
+    min-height: auto;
+    padding-bottom: 0.6rem;
+    overflow: hidden;
+    width: 100%;
   }
 
-  .what-we-are__layout {
-    grid-template-columns: 1fr;
+  .what-we-are__heading {
+    font-size: clamp(1.9rem, 8vw, 2.6rem);
+  }
+
+  .what-we-are__map-bg {
+    top: 8px;
+    width: clamp(980px, 265vw, 1500px);
+    opacity: 0.95;
+  }
+
+  .what-we-are__copy,
+  .what-we-are__card--mid,
+  .what-we-are__card--bottom,
+  .what-we-are__visual,
+  .what-we-are__card {
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+  }
+
+  .what-we-are__card-title {
+    font-size: clamp(1.6rem, 7vw, 2.1rem);
+  }
+
+  .what-we-are__card p {
+    font-size: clamp(0.95rem, 4.2vw, 1.2rem);
+  }
+
+  .what-we-are__card--mid {
+    width: 100%;
+    margin-top: clamp(7rem, 20vw, 10rem);
+  }
+
+  .what-we-are__card--bottom {
+    width: 100%;
+    margin: clamp(6rem, 18vw, 9rem) 0 0;
+  }
+
+  .what-we-are__copy {
+    width: 100%;
+    margin-top: clamp(3.8rem, 12vw, 5.8rem);
   }
 
   .what-we-are__visual {
-    min-height: clamp(320px, 75vw, 460px);
-    margin-top: 0.5rem;
-    transform: none;
+    width: 100%;
+    margin-top: 0.8rem;
   }
 
-  .what-we-are__image--front {
-    left: 0;
-    max-width: 92%;
-  }
-
-  .what-we-are__image--back {
-    max-width: 58%;
+  .what-we-are__image {
+    height: clamp(150px, 42vw, 235px);
   }
 
   #community .content-section__title {
