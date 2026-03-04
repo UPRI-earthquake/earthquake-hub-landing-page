@@ -1,126 +1,139 @@
-import SectionLayout from "./SectionLayout"
-import { useEffect, useMemo, useState } from "react"
+import { useState, useEffect, useRef } from "react"
 import { products } from "../../data/products"
 
 const ProductsSection = () => {
-  const productCount = products.length
-  const [activeIndex, setActiveIndex] = useState(productCount > 1 ? 1 : 0)
+  const [displayIndex, setDisplayIndex] = useState(0)
+  const [pendingIndex, setPendingIndex] = useState(null)
+  const [phase, setPhase] = useState("idle") // 'idle' | 'exit' | 'enter'
+  const [direction, setDirection] = useState("next") // 'next' | 'prev'
+  const exitTimer = useRef(null)
+  const enterTimer = useRef(null)
 
-  const getWrappedIndex = (index) => {
-    if (productCount === 0) {
-      return 0
-    }
-
-    return (index + productCount) % productCount
+  const navigate = (dir) => {
+    if (phase !== "idle") return
+    const next =
+      dir === "next"
+        ? (displayIndex + 1) % products.length
+        : (displayIndex - 1 + products.length) % products.length
+    setDirection(dir)
+    setPendingIndex(next)
+    setPhase("exit")
   }
 
-  const visibleProducts = useMemo(() => {
-    if (productCount === 0) {
-      return []
-    }
-
-    if (productCount === 1) {
-      return [products[0], products[0], products[0]]
-    }
-
-    return [
-      products[getWrappedIndex(activeIndex - 1)],
-      products[getWrappedIndex(activeIndex)],
-      products[getWrappedIndex(activeIndex + 1)],
-    ]
-  }, [activeIndex, productCount])
-
-  const activeProduct = useMemo(() => {
-    if (!visibleProducts.length) {
-      return null
-    }
-
-    if (visibleProducts[1]) {
-      return visibleProducts[1]
-    }
-
-    return visibleProducts[0]
-  }, [visibleProducts])
-
-  const handleCardSelect = (cardIndex) => {
-    if (productCount < 2 || cardIndex === 1) {
-      return
-    }
-
-    if (cardIndex === 0) {
-      setActiveIndex((prevIndex) => (prevIndex - 1 + productCount) % productCount)
-      return
-    }
-
-    if (cardIndex === 2) {
-      setActiveIndex((prevIndex) => (prevIndex + 1) % productCount)
-    }
+  const goToIndex = (i) => {
+    if (phase !== "idle" || i === displayIndex) return
+    setDirection(i > displayIndex ? "next" : "prev")
+    setPendingIndex(i)
+    setPhase("exit")
   }
 
   useEffect(() => {
-    if (productCount < 2) {
-      return
+    if (phase === "exit") {
+      exitTimer.current = setTimeout(() => {
+        setDisplayIndex(pendingIndex)
+        setPhase("enter")
+      }, 320)
     }
-
-    const handleKeyDown = (event) => {
-      if (!window.matchMedia("(min-width: 901px)").matches) {
-        return
-      }
-
-      if (event.key === "ArrowRight") {
-        setActiveIndex((prevIndex) => (prevIndex + 1) % productCount)
-      }
-
-      if (event.key === "ArrowLeft") {
-        setActiveIndex((prevIndex) => (prevIndex - 1 + productCount) % productCount)
-      }
+    if (phase === "enter") {
+      enterTimer.current = setTimeout(() => {
+        setPhase("idle")
+        setPendingIndex(null)
+      }, 480)
     }
+    return () => {
+      clearTimeout(exitTimer.current)
+      clearTimeout(enterTimer.current)
+    }
+  }, [phase, pendingIndex])
 
-    window.addEventListener("keydown", handleKeyDown)
+  const product = products[displayIndex]
 
-    return () => window.removeEventListener("keydown", handleKeyDown)
-  }, [productCount])
+  let cardClass = "products-card"
+  if (phase === "exit") {
+    cardClass +=
+      direction === "next"
+        ? " products-card--exit-left"
+        : " products-card--exit-right"
+  } else if (phase === "enter") {
+    cardClass +=
+      direction === "next"
+        ? " products-card--enter-right"
+        : " products-card--enter-left"
+  }
 
   return (
-    <SectionLayout
-      id="products"
-      label="Products"
-      variant="light"
-      title="Products"
-    >
-      <div className="products-panel">
-        <h3 className="products-panel__title">Products</h3>
+    <section id="products" className="products-section">
+      <div className="products-section__inner">
+        <h2 className="products-section__title">Products</h2>
 
-        <div className="products-grid">
-          {visibleProducts.map((product, index) => {
-            const isFeatured = index === 1
+        <div className="products-viewport">
+          <div className={cardClass}>
+            <div className="products-card__desc">
+              <h3 className="products-card__name">{product.title}</h3>
+              <p className="products-card__description">{product.description}</p>
+            </div>
 
-            return (
-            <button
-              key={`${product.id}-${index}`}
-              className={`product-card ${isFeatured ? "product-card--featured" : ""}`}
-              type="button"
-              onClick={() => handleCardSelect(index)}
-              aria-label={isFeatured ? `${product.title} selected` : `Select ${product.title}`}
-            >
-              <div className="product-card__thumb">
-                <img
-                  src={product.images?.[0]}
-                  alt={product.title}
-                  className="product-card__image"
-                />
-              </div>
-              <span className="product-card__nameplate">{product.title.toUpperCase()}</span>
-            </button>
-            )
-          })}
+            <div className="products-card__visual">
+              <div className="products-card__halfcircle" aria-hidden="true" />
+              <img
+                className="products-card__image"
+                src={product.images}
+                alt={product.title}
+              />
+            </div>
+          </div>
         </div>
 
-        <p className="products-panel__description">
-          {activeProduct?.description}
-        </p>
+        <div className="products-nav">
+          <button
+            className="products-nav__btn"
+            onClick={() => navigate("prev")}
+            aria-label="Previous product"
+            disabled={phase !== "idle"}
+          >
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+              <path
+                d="M11 3L5 9L11 15"
+                stroke="#F5F7FA"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </button>
+
+          <div className="products-nav__dots">
+            {products.map((_, i) => (
+              <button
+                key={i}
+                className={`products-nav__dot${
+                  i === displayIndex ? " products-nav__dot--active" : ""
+                }`}
+                onClick={() => goToIndex(i)}
+                aria-label={`Go to ${products[i].title}`}
+              />
+            ))}
+          </div>
+
+          <button
+            className="products-nav__btn"
+            onClick={() => navigate("next")}
+            aria-label="Next product"
+            disabled={phase !== "idle"}
+          >
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+              <path
+                d="M7 3L13 9L7 15"
+                stroke="#F5F7FA"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </button>
+        </div>
       </div>
-    </SectionLayout>
+    </section>
   )
 }
 
