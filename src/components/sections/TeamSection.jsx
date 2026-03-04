@@ -1,11 +1,15 @@
 import SectionLayout from "./SectionLayout"
 
 const members = [
-  { name: "Full Name Here", role: "Position" },
-  { name: "Full Name Here", role: "Position" },
-  { name: "Full Name Here", role: "Position" },
-  { name: "Full Name Here", role: "Intern" },
-  { name: "Full Name Here", role: "Intern" },
+  { name: "Dr. Alfredo Mahar Francisco A. Lagmay", role: "Project Leader" },
+  { name: "Engr. Christopher Jeff A. Sanchez", role: "Software Engineer, Team Lead" },
+  { name: "Engr. John Christian C. Cabang", role: "Software Engineer, Team Lead" },
+  { name: "Lyward Manuel S. Tongzon", role: "Software Engineer, 2024-intern" },
+  { name: "Alyssa Patricia Ocampo", role: "2023-Intern" },
+  { name: "Kim Nique", role: "2024-Intern" },
+  { name: "Rebecca Yap", role: "2025-Intern" },
+  { name: "John Rhey Bayotlang", role: "2026-Intern" },
+  { name: "Samuel Chinguangco", role: "2026-Intern" },
 ]
 
 const TeamSection = () => {

@@ -1438,7 +1438,7 @@ h6 {
 .team {
   width: min(1120px, 100%);
   margin: 0 auto;
-  padding: clamp(0.5rem, 1vw, 1rem) 0 clamp(0.8rem, 2vw, 1.8rem);
+  padding: clamp(0.7rem, 1.2vw, 1.4rem) 0 clamp(1.2rem, 2.4vw, 2.2rem);
 }
 
 .team__header {
@@ -1447,22 +1447,22 @@ h6 {
 
 .team__title {
   margin: 0;
-  font-size: clamp(2rem, 5vw, 3.8rem);
+  font-size: clamp(2.35rem, 5vw, 3.85rem);
   line-height: 1.05;
   font-weight: 700;
 }
 
 .team__subtitle {
-  margin: 0.8rem 0 0;
+  margin: 0.55rem 0 0;
   color: #ececec;
-  font-size: clamp(1rem, 1.5vw, 1.4rem);
+  font-size: clamp(0.98rem, 1.2vw, 1.1rem);
 }
 
 .team__grid {
-  margin-top: clamp(2.2rem, 4vw, 3.6rem);
+  margin-top: clamp(2.4rem, 4.2vw, 4rem);
   display: grid;
   grid-template-columns: repeat(6, minmax(0, 1fr));
-  gap: clamp(2.2rem, 4vw, 3.8rem) clamp(1rem, 2vw, 2rem);
+  gap: clamp(2.8rem, 4.6vw, 4.8rem) clamp(0.8rem, 1.6vw, 1.6rem);
 }
 
 .team__member {
@@ -1473,30 +1473,61 @@ h6 {
   text-align: center;
 }
 
+.team__member:nth-child(1) {
+  grid-column: 3 / span 2;
+}
+
+.team__member:nth-child(2) {
+  grid-column: 1 / span 2;
+}
+
+.team__member:nth-child(3) {
+  grid-column: 3 / span 2;
+}
+
 .team__member:nth-child(4) {
-  grid-column: 2 / span 2;
+  grid-column: 5 / span 2;
 }
 
 .team__member:nth-child(5) {
+  grid-column: 1 / span 2;
+}
+
+.team__member:nth-child(6) {
+  grid-column: 3 / span 2;
+}
+
+.team__member:nth-child(7) {
+  grid-column: 5 / span 2;
+}
+
+.team__member:nth-child(8) {
+  grid-column: 2 / span 2;
+}
+
+.team__member:nth-child(9) {
   grid-column: 4 / span 2;
 }
 
 .team__avatar {
-  width: clamp(140px, 16vw, 205px);
+  width: clamp(126px, 13.8vw, 150px);
   aspect-ratio: 1 / 1;
   border-radius: 999px;
-  background: #e5e5e5;
+  background: #e8e8e8;
 }
 
 .team__member h3 {
-  margin: clamp(1.1rem, 2vw, 1.6rem) 0 0;
-  font-size: clamp(1.2rem, 1.8vw, 1.95rem);
-  font-weight: 500;
+  margin: 0.9rem 0 0;
+  max-width: 24ch;
+  font-size: clamp(1.05rem, 1.25vw, 1.22rem);
+  font-weight: 400;
+  line-height: 1.35;
 }
 
 .team__member p {
-  margin: 0.35rem 0 0;
-  font-size: clamp(1.2rem, 1.7vw, 1.8rem);
+  margin: 0.55rem 0 0;
+  font-size: clamp(1rem, 1.15vw, 1.1rem);
+  color: #ececec;
 }
 
 #come-work-with-us {
@@ -1973,8 +2004,7 @@ h6 {
     grid-column: span 1;
   }
 
-  .team__member:nth-child(4),
-  .team__member:nth-child(5) {
+  .team__member:nth-child(n) {
     grid-column: span 1;
   }
 
