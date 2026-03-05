@@ -1,10 +1,45 @@
-const contactItems = [
-  { type: 'phone', label: '', value: '123-456-7890' },
-  { type: 'website', label: '', value: 'www.something.com' },
-  { type: 'email', label: '', value: 'seismo.edu.ph' },
+const contactGroups = [
+  {
+    title: 'UPRI Seismo Team',
+    items: [
+      { type: 'facebook', value: 'Facebook' },
+      { type: 'phone', value: '1234567890' },
+      { type: 'email', value: 'seismo.edu.ph' },
+    ],
+  },
+  {
+    title: 'University of the Philippines',
+    items: [
+      {
+        type: 'facebook',
+        value: 'Facebook',
+        href: 'https://www.facebook.com/upsystem',
+      },
+      { type: 'phone', value: '289818500' },
+    ],
+  },
+  {
+    title: 'UP Resilience Institute',
+    items: [
+      {
+        type: 'facebook',
+        value: 'Facebook',
+        href: 'https://www.facebook.com/UPResilienceInstitute',
+      },
+      { type: 'phone', value: '289818500' },
+    ],
+  },
 ]
 
 const ContactIcon = ({ type }) => {
+  if (type === 'facebook') {
+    return (
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M13.5 21v-7h2.3l.4-2.8h-2.7V9.4c0-.8.2-1.4 1.4-1.4h1.4V5.5c-.2 0-1-.1-2-.1-2 0-3.3 1.2-3.3 3.5v2.3H8.7V14H11v7h2.5Z" />
+      </svg>
+    )
+  }
+
   if (type === 'phone') {
     return (
       <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -12,15 +47,6 @@ const ContactIcon = ({ type }) => {
       </svg>
     )
   }
-
-  if (type === 'website') {
-    return (
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm6.92 9h-3.05a15.88 15.88 0 0 0-1.47-5.07A8.02 8.02 0 0 1 18.92 11Zm-6.92 9a13.9 13.9 0 0 1-2.12-5h4.24A13.9 13.9 0 0 1 12 20Zm-2.53-7a13.9 13.9 0 0 1 0-2h5.06a13.9 13.9 0 0 1 0 2H9.47ZM4.08 13h3.05c.1 1.75.62 3.49 1.47 5.07A8.02 8.02 0 0 1 4.08 13Zm3.05-2H4.08a8.02 8.02 0 0 1 4.52-5.07A15.88 15.88 0 0 0 7.13 11ZM12 4a13.9 13.9 0 0 1 2.12 5H9.88A13.9 13.9 0 0 1 12 4Zm2.4 14.07A15.88 15.88 0 0 0 15.87 13h3.05a8.02 8.02 0 0 1-4.52 5.07Z" />
-      </svg>
-    )
-  }
-
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true">
       <path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 4.24-8 5-8-5V6l8 5 8-5v2.24Z" />
@@ -33,29 +59,41 @@ const Footer = () => {
     <footer id="contact-us" className="footer">
       <div className="footer__inner">
         <section className="footer__left" aria-label="Contact details">
-          <div className="footer__brand">
+          {contactGroups.map((group, index) => (
+            <article
+              className={`footer__column ${
+                index === 2 ? 'footer__column--bottom-right' : ''
+              }`}
+              key={group.title}
+            >
+              <h2>{group.title}</h2>
+              <ul className="footer__contacts">
+                {group.items.map((item) => (
+                  <li key={`${group.title}-${item.type}-${item.value}`}>
+                    <span className="footer__icon" aria-hidden="true">
+                      <ContactIcon type={item.type} />
+                    </span>
+                    {item.href ? (
+                      <a href={item.href} target="_blank" rel="noreferrer">
+                        {item.value}
+                      </a>
+                    ) : (
+                      <span>{item.value}</span>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </article>
+          ))}
+        </section>
+
+        <section className="footer__right" aria-label="Brand">
+          <div className="footer__logo-card">
             <p className="footer__brand-top">Resilience Institute</p>
             <p className="footer__brand-main">SEISMO</p>
           </div>
-
-          <h2>Contact Us</h2>
-
-          <ul className="footer__contacts">
-            {contactItems.map((item) => (
-              <li key={`${item.type}-${item.value}`}>
-                <span className="footer__icon" aria-hidden="true">
-                  <ContactIcon type={item.type} />
-                </span>
-                <span>
-                  {item.label ? <strong>{item.label} </strong> : null}
-                  {item.value}
-                </span>
-              </li>
-            ))}
-          </ul>
+          <p className="footer__cta">Your Gateway To Seismic Resilience</p>
         </section>
-
-        <p className="footer__cta">Reach out to us today</p>
       </div>
     </footer>
   )

@@ -1,8 +1,11 @@
 import { useEffect, useRef, useState } from 'react'
-import banner from './assets/qqbanner.JPG'
+import banner from './assets/HEROBG.png'
+import seismoLogo from './assets/SEISMOFAVICON.png'
 
 const navItems = [
   { label: 'Projects', targetId: 'projects' },
+  { label: 'Community', targetId: 'community' },
+  { label: 'Publications', targetId: 'publications' },
   { label: 'Station View', targetId: 'station-view' },
   { label: 'Products', targetId: 'products' },
   { label: 'Contact Us', targetId: 'contact-us' },
@@ -67,8 +70,17 @@ const Hero = () => {
     <header className="hero">
       <figure className="hero__figure">
         <img className="hero__image" src={banner} alt="Seismo team banner" />
-        <figcaption className="hero__caption">
-          <h1>Empowering Citizen Science for Seismic Resilience</h1>
+      </figure>
+
+      <div className="hero__body">
+        <div className="hero__logo-col">
+          <img src={seismoLogo} alt="Seismo" className="hero__brand-logo" />
+        </div>
+        <div className="hero__caption">
+          <h1>
+            Empowering Citizen Science for{' '}
+            <span className="hero__highlight">Seismic Resilience</span>
+          </h1>
           <p>
             UPRI&apos;s Seismo Engineering Team enhances community driven earthquake
             monitoring and education through science, innovation, and collaboration.
@@ -80,8 +92,22 @@ const Hero = () => {
           >
             Learn More
           </button>
-        </figcaption>
-      </figure>
+        </div>
+      </div>
+
+      <div className="hero__explore">
+        <button
+          type="button"
+          className="hero__explore-btn"
+          onClick={() => handleNavClick('projects')}
+        >
+          Explore Our Work
+        </button>
+        <div className="hero__scroll-indicator" aria-hidden="true">
+          <span />
+          <span />
+        </div>
+      </div>
 
       <nav
         ref={navRef}
