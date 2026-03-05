@@ -9,18 +9,23 @@ const PublicationsSection = () => {
       variant="green-alt"
       className="publications-section"
     >
-      <div className="publication-overlay">
-        <h2 className="publication-overlay__title">Publications</h2>
-        <ul className="publication-overlay__list">
-          {publications.map((pub, i) => (
-            <li key={i} className="publication-overlay__item">
-              <strong className="publication-overlay__item-title">{pub.title}</strong>
-              <span className="publication-overlay__item-citation">{pub.citation}</span>
-            </li>
+      <div className="publications-wrap">
+        <h2 className="publications-wrap__title">Publications</h2>
+        <div className="publications-cards">
+          {publications.map((publication, index) => (
+            <article
+              key={`${publication.year}-${index}`}
+              className="publication-card"
+            >
+              <header className="publication-card__header">
+                <h3 className="publication-card__title">{publication.title}</h3>
+                <span className="publication-card__year">{publication.year}</span>
+              </header>
+              <p className="publication-card__citation">{publication.citation}</p>
+            </article>
           ))}
-        </ul>
+        </div>
       </div>
-
     </SectionLayout>
   )
 }

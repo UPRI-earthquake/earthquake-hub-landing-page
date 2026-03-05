@@ -306,82 +306,146 @@ h6 {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  padding: 0;
+  padding: clamp(2rem, 4vw, 3.5rem) clamp(1rem, 4vw, 4rem);
   min-height: auto;
 }
 
 #publications .content-section__inner {
-  width: 100%;
-  padding: 0;
+  width: min(1220px, 100%);
+  padding: 0 clamp(0.2rem, 1.2vw, 1rem);
+  margin: 0 auto;
+}
+
+.publications-wrap {
+  width: min(1240px, 100%);
+  margin: 0 auto;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.25rem, 2vw, 1.9rem);
+}
+
+.publications-wrap::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  background: rgba(255, 255, 255, 0.7);
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.publications-wrap__title {
   margin: 0;
-}
-
-.publication-overlay {
-  width: 90%;
-  height: clamp(420px, 52vh, 580px);
-  background: rgba(43, 143, 51, 0.92);
-  padding: clamp(2rem, 3.5vw, 3.5rem) clamp(2rem, 4vw, 4rem);
-  border-top-right-radius: 60px;
-  border-bottom-right-radius: 60px;
-  box-shadow: 10px 0 30px rgba(0,0,0,0.2);
-  display: flex;
-  flex-direction: column;
-}
-
-.publication-overlay__title {
-  margin: 0 0 clamp(1rem, 2vw, 1.8rem) 0;
-  font-size: clamp(1.6rem, 3vw, 2.4rem);
-  font-weight: 800;
-  color: #ffffff;
-  letter-spacing: 0.02em;
-}
-
-.publication-overlay__list {
-  list-style: none;
-  margin: 0;
-  padding: 0 0.5rem 0 0;
-  display: flex;
-  flex-direction: column;
-  gap: clamp(0.8rem, 1.4vw, 1.2rem);
-  overflow-y: auto;
-  flex: 1;
-}
-
-.publication-overlay__list::-webkit-scrollbar {
-  width: 6px;
-}
-
-.publication-overlay__list::-webkit-scrollbar-track {
-  background: rgba(255,255,255,0.1);
-  border-radius: 3px;
-}
-
-.publication-overlay__list::-webkit-scrollbar-thumb {
-  background: rgba(255,255,255,0.35);
-  border-radius: 3px;
-}
-
-.publication-overlay__list::-webkit-scrollbar-thumb:hover {
-  background: rgba(255,255,255,0.55);
-}
-
-.publication-overlay__item {
-  font-size: clamp(0.78rem, 1.1vw, 0.95rem);
-  line-height: 1.5;
-  color: #f0f0f0;
-  display: flex;
-  flex-direction: column;
-  gap: 0.15rem;
-}
-
-.publication-overlay__item-title {
-  font-weight: 700;
-  color: #ffffff;
-}
-
-.publication-overlay__item-citation {
+  font-size: clamp(2rem, 4vw, 3.4rem);
   font-weight: 400;
-  color: #d9f0da;
+  color: #ffffff;
+  line-height: 1.08;
+}
+
+.publications-cards {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.7rem, 2.8vw, 2.6rem);
+}
+
+.publication-card {
+  position: relative;
+  width: calc(50% - clamp(0.65rem, 1.2vw, 1rem));
+  padding: clamp(1rem, 1.6vw, 1.35rem) clamp(1rem, 1.8vw, 1.5rem);
+  border-radius: 24px;
+  background: #0f3d2e;
+  color: #ffffff;
+  box-shadow:
+    inset 0 3px 10px rgba(255, 255, 255, 0.08),
+    inset 0 -8px 18px rgba(0, 0, 0, 0.28);
+}
+
+.publication-card::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  height: 1px;
+  width: clamp(0.65rem, 1.2vw, 1rem);
+  background: rgba(255, 255, 255, 0.7);
+  transform: translateY(-50%);
+}
+
+.publication-card:nth-child(odd) {
+  margin-right: auto;
+}
+
+.publication-card:nth-child(odd)::after {
+  right: calc(clamp(0.65rem, 1.2vw, 1rem) * -1);
+}
+
+.publication-card:nth-child(even) {
+  margin-left: auto;
+  margin-top: clamp(0.9rem, 1.5vw, 1.3rem);
+}
+
+.publication-card:nth-child(even)::after {
+  left: calc(clamp(0.65rem, 1.2vw, 1rem) * -1);
+}
+
+.publication-card:nth-child(even) .publication-card__header {
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+}
+
+.publication-card:nth-child(even) .publication-card__title,
+.publication-card:nth-child(even) .publication-card__citation {
+  text-align: right;
+}
+
+.publication-card__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.7rem;
+  margin-bottom: clamp(0.7rem, 1vw, 0.95rem);
+}
+
+.publication-card__title {
+  margin: 0;
+  color: #ffffff;
+  font-size: clamp(1.05rem, 1.85vw, 1.65rem);
+  font-weight: 400;
+  line-height: 1.18;
+  max-width: 24ch;
+}
+
+.publication-card__year {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: clamp(74px, 6.8vw, 96px);
+  height: clamp(40px, 3.8vw, 50px);
+  border-radius: 999px;
+  padding: 0 clamp(0.75rem, 1.3vw, 1rem);
+  background: #515151;
+  color: #ffffff;
+  font-size: clamp(1rem, 1.5vw, 1.55rem);
+  font-weight: 400;
+  line-height: 1;
+  flex-shrink: 0;
+  box-shadow:
+    inset 0 2px 4px rgba(255, 255, 255, 0.14),
+    inset 0 -4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.publication-card__citation {
+  margin: 0;
+  color: #ffffff;
+  font-size: clamp(0.78rem, 1.1vw, 1.05rem);
+  font-weight: 300;
+  line-height: 1.35;
+  max-width: 66ch;
 }
 
 #what-we-are {
@@ -1933,11 +1997,53 @@ h6 {
     transform: rotate(6deg) translateX(-4px);
   }
 
-  .publication-overlay {
+  .publications-wrap__title {
+    font-size: clamp(1.8rem, 7vw, 2.8rem);
+  }
+
+  .publication-card {
     width: 100%;
-    height: clamp(350px, 60vh, 480px);
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
+    border-radius: 18px;
+    padding: clamp(1rem, 4vw, 1.4rem);
+  }
+
+  .publications-wrap::after,
+  .publication-card::after {
+    display: none;
+  }
+
+  .publication-card:nth-child(even) {
+    margin-left: 0;
+    margin-top: 0;
+  }
+
+  .publication-card:nth-child(even) .publication-card__header {
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .publication-card:nth-child(even) .publication-card__title,
+  .publication-card:nth-child(even) .publication-card__citation {
+    text-align: left;
+  }
+
+  .publication-card__header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .publication-card__title {
+    font-size: clamp(1.45rem, 5.6vw, 2.05rem);
+  }
+
+  .publication-card__year {
+    min-width: 76px;
+    height: 44px;
+    font-size: clamp(1.35rem, 5vw, 1.7rem);
+  }
+
+  .publication-card__citation {
+    font-size: clamp(0.98rem, 3.9vw, 1.2rem);
   }
 
   .station-view__headline {
