@@ -513,9 +513,14 @@ h6 {
   gap: clamp(1.8rem, 4vw, 4rem);
 }
 
+.community__layout > * {
+  min-width: 0;
+}
+
 .community__copy {
-  /* max-width: 420px; */
-  width: 100%;
+  /* max-width: inheri; */
+  /* width: 100%; */
+  min-width: 0;
   opacity: 0;
   transform: translateX(-34px);
   transition: opacity 0.65s ease, transform 0.75s cubic-bezier(0.22, 0.61, 0.36, 1);
@@ -541,6 +546,8 @@ h6 {
   color: #7cff8c;
   text-decoration: underline;
   text-underline-offset: 0.14em;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .community__links a:hover {
@@ -619,6 +626,15 @@ h6 {
   }
   to {
     transform: rotate(5deg) translateY(-50%);
+  }
+}
+
+@keyframes communityInfiniteScrollHorizontal {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
   }
 }
 
@@ -2163,6 +2179,69 @@ h6 {
     margin-bottom: 0.5rem;
     width: 40px;
     height: 40px;
+  }
+}
+
+@media (max-width: 900px) {
+  .community__layout {
+    grid-template-columns: 1fr;
+  }
+
+  .community__copy {
+    order: 1;
+    max-width: min(100%, 38rem);
+    /* margin: 0 auto; */
+    padding: 0 0.2rem;
+  }
+
+  .community__copy p {
+    font-size: clamp(0.95rem, 4vw, 1.12rem);
+    line-height: 1.5;
+  }
+
+    .community__links {
+    overflow-wrap: anywhere;
+  }
+
+  .community__visual {
+    order: 2;
+    justify-content: center;
+    margin-top: 0.75rem;
+  }
+
+  .community__carousel {
+    width: 100%;
+    max-width: 100%;
+    height: clamp(190px, 52vw, 280px);
+    overflow: hidden;
+  }
+
+  .community__track {
+    flex-direction: row;
+    width: max-content;
+    height: 100%;
+    animation: communityInfiniteScrollHorizontal 30s linear infinite;
+    transform-origin: left center;
+  }
+
+  .community__track-group {
+    flex-direction: row;
+    width: max-content;
+    height: 100%;
+  }
+
+  .community__image {
+    width: clamp(220px, 62vw, 340px);
+    height: 100%;
+    margin: 0 clamp(0.8rem, 2.8vw, 1rem) 0 0;
+  }
+
+  .community__track-group .community__image:nth-child(odd) {
+    transform: rotate(2deg) translateY(3px);
+  }
+
+  .community__track-group .community__image:nth-child(even) {
+    transform: rotate(-2deg) translateY(-3px);
   }
 }
 
