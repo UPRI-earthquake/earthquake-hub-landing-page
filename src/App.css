@@ -566,6 +566,33 @@ h6 {
   width: 100%;
 }
 
+.what-we-are__reveal {
+  opacity: 0;
+  transform: translateY(34px) scale(0.985);
+  transition: opacity 0.7s ease, transform 0.82s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.what-we-are__reveal.what-we-are__reveal--visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.what-we-are__reveal--heading {
+  transition-delay: 0.08s;
+}
+
+.what-we-are__reveal--card-1 {
+  transition-delay: 0.16s;
+}
+
+.what-we-are__reveal--card-2 {
+  transition-delay: 0.24s;
+}
+
+.what-we-are__reveal--card-3 {
+  transition-delay: 0.32s;
+}
+
 .what-we-are__heading {
   position: relative;
   margin: 0;
@@ -652,6 +679,15 @@ h6 {
   height: clamp(150px, 16vw, 240px);
   object-fit: cover;
   border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .what-we-are__reveal,
+  .what-we-are__reveal.what-we-are__reveal--visible {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }
 
 #community {
@@ -814,6 +850,32 @@ h6 {
   background: #e7e7e7;
   overflow: visible;
 }
+
+.station-view__reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.65s ease, transform 0.75s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.station-view--visible .station-view__reveal {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.station-view__bottom .station-view__reveal {
+  opacity: 0;
+  transform: translateY(26px);
+}
+
+.station-view__bottom .station-view__reveal.station-view__reveal--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.station-view__reveal--top {
+  transition-delay: 0.04s;
+}
+
 
 .station-view__top {
   position: relative;
@@ -1186,6 +1248,15 @@ h6 {
 
 .station-view__feature-image-card--significant {
   max-width: 600px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .station-view__reveal,
+  .station-view--visible .station-view__reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }
 #projects .content-section__title {
   font-size: clamp(2rem, 8vw, 3rem);
