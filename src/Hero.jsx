@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import banner from './assets/HEROBG.png'
+import banner from './assets/HEROBG.avif'
 import seismoLogo from './assets/SEISMOFAVICON_converted.avif'
 
 const navItems = [
