@@ -1,23 +1,6 @@
 import SectionLayout from "./SectionLayout"
 
-const careers = [
-  {
-    title: "Career 1",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-  },
-  {
-    title: "Career 2",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    imageLabel: "career picture here",
-  },
-  {
-    title: "Career 3",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-  },
-]
+const careers = []
 
 const ComeWorkWithUsSection = () => {
   return (
@@ -28,17 +11,23 @@ const ComeWorkWithUsSection = () => {
           <p className="careers__subtitle">Opportunities await</p>
         </header>
 
-        <div className="careers__grid">
-          {careers.map((career) => (
-            <article className="career-card" key={career.title}>
-              <div className="career-card__image">{career.imageLabel || null}</div>
-              <div className="career-card__body">
-                <h3>{career.title}</h3>
-                <p>{career.description}</p>
-              </div>
-            </article>
-          ))}
-        </div>
+        {careers.length > 0 ? (
+          <div className="careers__grid">
+            {careers.map((career) => (
+              <article className="career-card" key={career.title}>
+                <div className="career-card__image">{career.imageLabel || null}</div>
+                <div className="career-card__body">
+                  <h3>{career.title}</h3>
+                  <p>{career.description}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+        ) : (
+          <p className="careers__empty">
+            There are no job openings at the moment. Please check back soon.
+          </p>
+        )}
       </div>
     </SectionLayout>
   )
