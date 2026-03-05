@@ -1,5 +1,5 @@
 import QQImg from "../assets/QQ-logo.png";
-import seismoFavicon from "../assets/SEISMOFAVICON.png";
+import seismoFavicon from "../assets/SEISMOFAVICON_converted.avif";
 import shakeTIcon from "../assets/shaketable.png";
 
 export const projects = [

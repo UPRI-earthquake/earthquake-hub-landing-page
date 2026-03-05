@@ -1,4 +1,4 @@
-import r_Shake from "../assets/R-SHAKE.png";
+import r_Shake from "../assets/R-SHAKE_converted.avif";
 import singleST from "../assets/SingleAxisST.png";
 import doubleAxisST from "../assets/2AxisST.png";
 
