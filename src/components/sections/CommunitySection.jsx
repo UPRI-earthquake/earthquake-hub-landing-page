@@ -13,9 +13,12 @@ const communityImages = Object.entries(carouselImageModules)
     alt: `Community carousel image ${index + 1}`,
   }))
 
+
+
 const CommunitySection = () => {
   const layoutRef = useRef(null)
   const [isVisible, setIsVisible] = useState(false)
+  const [shouldLoadCarousel, setShouldLoadCarousel] = useState(false)
 
   useEffect(() => {
     const node = layoutRef.current
@@ -23,44 +26,47 @@ const CommunitySection = () => {
       return undefined
     }
 
-    let didReveal = false
-
-    const reveal = () => {
-      // Delay class toggle by 1 frame so CSS transitions can animate reliably.
+    if (!("IntersectionObserver" in window)) {
+      setShouldLoadCarousel(true)
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
           setIsVisible(true)
         })
       })
+      return undefined
     }
 
-    const checkVisibility = () => {
-      if (didReveal) {
-        return
-      }
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const [entry] = entries
+        if (!entry) {
+          return
+        }
 
-      const rect = node.getBoundingClientRect()
-      const viewportHeight =
-        window.innerHeight || document.documentElement.clientHeight
+        if (entry.isIntersecting || entry.intersectionRatio > 0) {
+          setShouldLoadCarousel(true)
+        }
 
-      const entersViewport = rect.top <= viewportHeight * 0.82
-      const notPassedCompletely = rect.bottom >= viewportHeight * 0.18
+        if (entry.intersectionRatio >= 0.18) {
+          // Delay class toggle by 1 frame so CSS transitions can animate reliably.
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              setIsVisible(true)
+            })
+          })
+          observer.unobserve(node)
+        }
+      },
+      {
+        threshold: [0, 0.18],
+        rootMargin: "0px 0px 220px 0px",
+      },
+    )
 
-      if (entersViewport && notPassedCompletely) {
-        didReveal = true
-        reveal()
-        window.removeEventListener("scroll", checkVisibility)
-        window.removeEventListener("resize", checkVisibility)
-      }
-    }
-
-    checkVisibility()
-    window.addEventListener("scroll", checkVisibility, { passive: true })
-    window.addEventListener("resize", checkVisibility)
+    observer.observe(node)
 
     return () => {
-      window.removeEventListener("scroll", checkVisibility)
-      window.removeEventListener("resize", checkVisibility)
+      observer.disconnect()
     }
   }, [])
 
@@ -90,7 +96,7 @@ const CommunitySection = () => {
               rel="noopener noreferrer"
             >
               Earthquake Citizen Science Philippines
-              <span className="community__link-icon" aria-hidden="true">↗</span>
+              <span className="community__link-icon" aria-hidden="true">{"\u2197"}</span>
             </a>
             <br />
             Facebook Page:{" "}
@@ -100,36 +106,44 @@ const CommunitySection = () => {
               rel="noopener noreferrer"
             >
               Quake Quest
-              <span className="community__link-icon" aria-hidden="true">↗</span>
+              <span className="community__link-icon" aria-hidden="true">{"\u2197"}</span>
             </a>
           </p>
         </div>
 
         <div className={`community__visual ${isVisible ? "community__visual--visible" : ""}`}>
           <div className="community__carousel" aria-label="Community image carousel">
-            <div className="community__track">
-              <div className="community__track-group">
-                {communityImages.map((image) => (
-                  <img
-                    key={image.alt}
-                    src={image.src}
-                    alt={image.alt}
-                    className="community__image"
-                  />
-                ))}
-              </div>
+            {shouldLoadCarousel ? (
+              <div className="community__track">
+                <div className="community__track-group">
+                  {communityImages.map((image, index) => (
+                    <img
+                      key={image.alt}
+                      src={image.src}
+                      alt={image.alt}
+                      className="community__image"
+                      loading={index === 0 ? "eager" : "lazy"}
+                      decoding={index === 0 ? "auto" : "async"}
+                      fetchPriority={index === 0 ? "high" : "auto"}
+                    />
+                  ))}
+                </div>
 
-              <div className="community__track-group" aria-hidden="true">
-                {communityImages.map((image) => (
-                  <img
-                    key={`${image.alt}-duplicate`}
-                    src={image.src}
-                    alt=""
-                    className="community__image"
-                  />
-                ))}
+                <div className="community__track-group" aria-hidden="true">
+                  {communityImages.map((image) => (
+                    <img
+                      key={`${image.alt}-duplicate`}
+                      src={image.src}
+                      alt=""
+                      className="community__image"
+                      loading="lazy"
+                      decoding="async"
+                      fetchPriority="auto"
+                    />
+                  ))}
+                </div>
               </div>
-            </div>
+            ) : null}
           </div>
         </div>
       </div>

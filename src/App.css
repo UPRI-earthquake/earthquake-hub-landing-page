@@ -497,6 +497,10 @@ h6 {
   overflow: hidden;
 }
 
+#community h2 {
+  font-size: clamp(2.35rem, 5vw, 3.85rem)
+}
+
 #community .content-section__title {
   margin-bottom: clamp(1.4rem, 2vw, 2.2rem);
   font-size: clamp(2.2rem, 5vw, 3.8rem);
@@ -576,7 +580,7 @@ h6 {
   flex-direction: column;
   width: 100%;
   height: max-content;
-  animation: communityInfiniteScroll 26s linear infinite;
+  animation: communityInfiniteScroll 35s linear infinite;
   transform-origin: center top;
 }
 
@@ -1874,6 +1878,7 @@ h6 {
     font-size: clamp(2rem, 8vw, 3rem);
   }
 
+
   .community__layout {
     grid-template-columns: 1fr;
   }
@@ -1896,7 +1901,7 @@ h6 {
   }
 
   .community__track {
-    animation-duration: 22s;
+    animation-duration: 35s;
   }
 
   .community__image {
