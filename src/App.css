@@ -533,6 +533,22 @@ h6 {
   margin-top: clamp(0.8rem, 1.4vw, 1.5rem);
 }
 
+.community__links a {
+  color: #7cff8c;
+  text-decoration: underline;
+  text-underline-offset: 0.14em;
+}
+
+.community__links a:hover {
+  color: #fff3b3;
+}
+
+.community__link-icon {
+  display: inline-block;
+  margin-left: 0.35em;
+  font-size: 0.95em;
+}
+
 .community__visual {
   width: 100%;
   display: flex;

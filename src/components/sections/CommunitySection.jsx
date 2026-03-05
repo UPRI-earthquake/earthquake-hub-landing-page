@@ -1,22 +1,21 @@
 import { useEffect, useRef, useState } from "react"
-import comm1 from "../../assets/comm1.JPG"
-import comm2 from "../../assets/comm2.JPG"
-import comm3 from "../../assets/comm3.JPG"
-import comm4 from "../../assets/comm4.JPG"
-import comm5 from "../../assets/comm5.JPG"
 import SectionLayout from "./SectionLayout"
+
+const carouselImageModules = import.meta.glob(
+  "../../assets/carousel/*.{png,PNG,jpg,JPG,jpeg,JPEG,webp,WEBP,avif,AVIF}",
+  { eager: true, import: "default" },
+)
+
+const communityImages = Object.entries(carouselImageModules)
+  .sort(([pathA], [pathB]) => pathA.localeCompare(pathB))
+  .map(([, src], index) => ({
+    src,
+    alt: `Community carousel image ${index + 1}`,
+  }))
 
 const CommunitySection = () => {
   const layoutRef = useRef(null)
   const [isVisible, setIsVisible] = useState(false)
-
-  const communityImages = [
-    { src: comm1, alt: "Community members gathered for a group photo" },
-    { src: comm2, alt: "Participants engaging during a community event" },
-    { src: comm3, alt: "Students and volunteers during outreach activities" },
-    { src: comm4, alt: "Community session with presenters and attendees" },
-    { src: comm5, alt: "Seismo team with community collaborators" },
-  ]
 
   useEffect(() => {
     const node = layoutRef.current
@@ -82,6 +81,27 @@ const CommunitySection = () => {
           <p>
             We build a stronger earthquake-ready culture by sharing practical
             knowledge and creating spaces for people to learn together.
+          </p>
+          <p className="community__links">
+            Facebook Group:{" "}
+            <a
+              href="https://www.facebook.com/groups/728109561898546"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Earthquake Citizen Science Philippines
+              <span className="community__link-icon" aria-hidden="true">↗</span>
+            </a>
+            <br />
+            Facebook Page:{" "}
+            <a
+              href="https://www.facebook.com/quakequest/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Quake Quest
+              <span className="community__link-icon" aria-hidden="true">↗</span>
+            </a>
           </p>
         </div>
 
