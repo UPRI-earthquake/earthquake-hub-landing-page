@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import SectionLayout from "./SectionLayout"
 import stationImage from "../../assets/station.png"
 import eqInfoImage from "../../assets/eqinfo.PNG"
@@ -7,7 +7,11 @@ import stationDataFullImage from "../../assets/stationdatafull.png"
 import significantEarthquakesImage from "../../assets/significantearthquakes.PNG"
 
 const StationViewSection = () => {
+  const sectionRef = useRef(null)
+  const bottomRowRefs = useRef([])
   const [selected, setSelected] = useState(null)
+  const [isVisible, setIsVisible] = useState(false)
+  const [visibleBottomRows, setVisibleBottomRows] = useState({})
 
   // Centralized copy for each interactive hotspot.
   // Keep keys aligned with `setSelected("<key>")` calls and CSS modifiers:
@@ -27,6 +31,92 @@ const StationViewSection = () => {
     window.open('https://earthquake.science.upd.edu.ph/')
   }
 
+  useEffect(() => {
+    const node = sectionRef.current
+    if (!node) {
+      return undefined
+    }
+
+    if (!("IntersectionObserver" in window)) {
+      setIsVisible(true)
+      return undefined
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const [entry] = entries
+        if (!entry) {
+          return
+        }
+
+        if (entry.isIntersecting || entry.intersectionRatio > 0.2) {
+          setIsVisible(true)
+          observer.unobserve(node)
+        }
+      },
+      {
+        threshold: [0.2],
+        rootMargin: "0px 0px -8% 0px",
+      },
+    )
+
+    observer.observe(node)
+
+    return () => {
+      observer.disconnect()
+    }
+  }, [])
+
+  useEffect(() => {
+    const nodes = bottomRowRefs.current.filter(Boolean)
+    if (nodes.length === 0) {
+      return undefined
+    }
+
+    if (!("IntersectionObserver" in window)) {
+      setVisibleBottomRows(
+        nodes.reduce((acc, _, index) => {
+          acc[index] = true
+          return acc
+        }, {}),
+      )
+      return undefined
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            return
+          }
+
+          const index = Number(entry.target.getAttribute("data-reveal-index"))
+          if (Number.isNaN(index)) {
+            return
+          }
+
+          setVisibleBottomRows((prev) => {
+            if (prev[index]) {
+              return prev
+            }
+            return { ...prev, [index]: true }
+          })
+          observer.unobserve(entry.target)
+        })
+      },
+      {
+        threshold: 0.2,
+        rootMargin: "0px 0px -8% 0px",
+      },
+    )
+
+    nodes.forEach((node) => observer.observe(node))
+
+    return () => {
+      observer.disconnect()
+    }
+  }, [])
+
   return (
     <SectionLayout
       id="station-view"
@@ -34,8 +124,11 @@ const StationViewSection = () => {
       variant="light"
       title="Station View"
     >
-      <div className="station-view">
-        <div className="station-view__top">
+      <div
+        ref={sectionRef}
+        className={`station-view ${isVisible ? "station-view--visible" : ""}`}
+      >
+        <div className="station-view__top station-view__reveal station-view__reveal--top">
           <h3 className="station-view__headline">
             Earthquake Data For All <span>Filipino Citizens</span>
           </h3>
@@ -118,8 +211,22 @@ const StationViewSection = () => {
         </div>
 
         <div className="station-view__bottom">
-          <p className="station-view__eyebrow">https://earthquake.science.upd.edu.ph/</p>
-          <div className="station-view__bottom-row station-view__bottom-row--primary">
+          <p
+            ref={(node) => {
+              bottomRowRefs.current[0] = node
+            }}
+            data-reveal-index="0"
+            className={`station-view__eyebrow station-view__reveal ${visibleBottomRows[0] ? "station-view__reveal--visible" : ""}`}
+          >
+            https://earthquake.science.upd.edu.ph/
+          </p>
+          <div
+            ref={(node) => {
+              bottomRowRefs.current[1] = node
+            }}
+            data-reveal-index="1"
+            className={`station-view__bottom-row station-view__bottom-row--primary station-view__reveal ${visibleBottomRows[1] ? "station-view__reveal--visible" : ""}`}
+          >
           <div className="station-view__copy">
             
             <h4>
@@ -139,7 +246,13 @@ const StationViewSection = () => {
           </div>
           </div>
 
-          <div className="station-view__bottom-row station-view__bottom-row--station-data">
+          <div
+            ref={(node) => {
+              bottomRowRefs.current[2] = node
+            }}
+            data-reveal-index="2"
+            className={`station-view__bottom-row station-view__bottom-row--station-data station-view__reveal ${visibleBottomRows[2] ? "station-view__reveal--visible" : ""}`}
+          >
             <div className="station-view__feature-image-card">
               <img
                 src={stationDataFullImage}
@@ -155,7 +268,13 @@ const StationViewSection = () => {
             </div>
           </div>
 
-          <div className="station-view__bottom-row station-view__bottom-row--significant">
+          <div
+            ref={(node) => {
+              bottomRowRefs.current[3] = node
+            }}
+            data-reveal-index="3"
+            className={`station-view__bottom-row station-view__bottom-row--significant station-view__reveal ${visibleBottomRows[3] ? "station-view__reveal--visible" : ""}`}
+          >
 
             <div className="station-view__feature-copy">
               <h5>Some Earthquakes Are Just More Special</h5>
@@ -172,13 +291,25 @@ const StationViewSection = () => {
             </div>
           </div>
 
-          <div className="station-view__bottom-row station-view__bottom-row--cta">
+          <div
+            ref={(node) => {
+              bottomRowRefs.current[4] = node
+            }}
+            data-reveal-index="4"
+            className={`station-view__bottom-row station-view__bottom-row--cta station-view__reveal ${visibleBottomRows[4] ? "station-view__reveal--visible" : ""}`}
+          >
             <button onClick={handleClick} type="button" className="station-view__cta">
               See it in action &#8594;
             </button>
           </div>
 
-          <div className="station-view__bottom-row station-view__bottom-row--docs">
+          <div
+            ref={(node) => {
+              bottomRowRefs.current[5] = node
+            }}
+            data-reveal-index="5"
+            className={`station-view__bottom-row station-view__bottom-row--docs station-view__reveal ${visibleBottomRows[5] ? "station-view__reveal--visible" : ""}`}
+          >
             <p className="station-view__docs-label">Documentation</p>
             <a
               className="station-view__docs-link"

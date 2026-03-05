@@ -815,6 +815,32 @@ h6 {
   overflow: visible;
 }
 
+.station-view__reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.65s ease, transform 0.75s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.station-view--visible .station-view__reveal {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.station-view__bottom .station-view__reveal {
+  opacity: 0;
+  transform: translateY(26px);
+}
+
+.station-view__bottom .station-view__reveal.station-view__reveal--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.station-view__reveal--top {
+  transition-delay: 0.04s;
+}
+
+
 .station-view__top {
   position: relative;
   z-index: 2;
@@ -1186,6 +1212,15 @@ h6 {
 
 .station-view__feature-image-card--significant {
   max-width: 600px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .station-view__reveal,
+  .station-view--visible .station-view__reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }
 #projects .content-section__title {
   font-size: clamp(2rem, 8vw, 3rem);
