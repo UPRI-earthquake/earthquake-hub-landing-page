@@ -3,6 +3,8 @@ import banner from './assets/qqbanner.JPG'
 
 const navItems = [
   { label: 'Projects', targetId: 'projects' },
+  { label: 'Community', targetId: 'community' },
+  { label: 'Publications', targetId: 'publications' },
   { label: 'Station View', targetId: 'station-view' },
   { label: 'Products', targetId: 'products' },
   { label: 'Contact Us', targetId: 'contact-us' },
