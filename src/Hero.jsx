@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import banner from './assets/HEROBG.png'
 import seismoLogo from './assets/SEISMOFAVICON.png'
+import seismologo2 from './assets/SEISMOFAVICON2.png'
 
 const navItems = [
   { label: 'Projects', targetId: 'projects' },
@@ -74,7 +75,7 @@ const Hero = () => {
 
       <div className="hero__body">
         <div className="hero__logo-col">
-          <img src={seismoLogo} alt="Seismo" className="hero__brand-logo" />
+          <img src={seismologo2} alt="Seismo" className="hero__brand-logo" />
         </div>
         <div className="hero__caption">
           <h1>

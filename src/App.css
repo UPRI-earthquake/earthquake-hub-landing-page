@@ -20,10 +20,12 @@ h1,
 h2,
 h3,
 h4,
-h5,
+h5
 h6 {
-  font-family: "Poppins", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Poppins", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;  
+  font-weight: 400;
 }
+
 
 .hero {
   position: relative;
@@ -367,7 +369,7 @@ h6 {
 .content-section__title {
   margin: 0;
   font-size: clamp(1.6rem, 3vw, 2.6rem);
-  font-weight: 700;
+  /* font-weight: 700; */
 }
 
 .content-section__slot {
@@ -598,7 +600,7 @@ h6 {
   margin: 0;
   text-align: center;
   font-size: clamp(2rem, 4.8vw, 3.2rem);
-  font-weight: 700;
+  /* font-weight: 700; */
   color: #1f1f1f;
   z-index: 2;
 }
@@ -888,7 +890,7 @@ h6 {
   margin: 0;
   font-size: clamp(1.8rem, 4.1vw, 3.3rem);
   line-height: 1.15;
-  font-weight: 800;
+  font-weight: 400;
 }
 
 .station-view__headline span {
@@ -1164,7 +1166,7 @@ h6 {
 
 .station-view__copy h4 span {
   color: #7cff8c;
-  font-weight: 800;
+  /* font-weight: 800; */
   text-shadow: 0 1px 0 rgba(5, 38, 14, 0.25);
 }
 
@@ -1345,6 +1347,9 @@ h6 {
   padding: clamp(1.5rem, 3vw, 2.5rem);
   max-height: clamp(340px, 45vh, 440px);
   overflow-y: auto;
+   -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer and Edge */
 }
 
 .project-card-item--expanded .project-card-header {
@@ -1494,7 +1499,7 @@ h6 {
 /* ===================== Products Section ===================== */
 
 .products-section {
-  background: #51a123;
+  background: #238f33;
   padding: clamp(3rem, 5vw, 5rem) clamp(1.5rem, 5vw, 4rem) clamp(2.5rem, 4vw, 4rem);
 }
 
@@ -1510,14 +1515,15 @@ h6 {
 .products-section__title {
   margin: 0;
   font-size: clamp(2rem, 4vw, 3rem);
-  font-weight: 700;
-  color: #000000;
+  /* font-weight: 700; */
+  color: #FFFFFF;
   font-family: "Poppins", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .products-viewport {
   width: 100%;
   overflow: hidden;
+  border-radius: clamp(20px, 3vw, 32px);
 }
 
 /* The main product card */
@@ -1731,7 +1737,7 @@ h6 {
   margin: 0;
   font-size: clamp(2.35rem, 5vw, 3.85rem);
   line-height: 1.05;
-  font-weight: 700;
+  /* font-weight: 700; */
 }
 
 .team__subtitle {
@@ -1839,7 +1845,7 @@ h6 {
   margin: 0;
   font-size: clamp(2.2rem, 4.8vw, 4rem);
   line-height: 1.05;
-  font-weight: 500;
+  /* font-weight: 500; */
 }
 
 .careers__subtitle {
@@ -1925,7 +1931,7 @@ h6 {
   margin: 0 0 0.9rem;
   color: #f8f8f8;
   font-size: clamp(1.05rem, 1.3vw, 1.75rem);
-  font-weight: 700;
+  /* font-weight: 700; */
 }
 
 .footer__column--bottom-right {
