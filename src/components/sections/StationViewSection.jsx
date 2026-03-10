@@ -211,15 +211,7 @@ const StationViewSection = () => {
         </div>
 
         <div className="station-view__bottom">
-          <p
-            ref={(node) => {
-              bottomRowRefs.current[0] = node
-            }}
-            data-reveal-index="0"
-            className={`station-view__eyebrow station-view__reveal ${visibleBottomRows[0] ? "station-view__reveal--visible" : ""}`}
-          >
-            https://earthquake.science.upd.edu.ph/
-          </p>
+          <div className="station-view__bottom-inner">
           <div
             ref={(node) => {
               bottomRowRefs.current[1] = node
@@ -319,6 +311,7 @@ const StationViewSection = () => {
             >
               https://upri-earthquake.github.io/
             </a>
+          </div>
           </div>
         </div>
       </div>

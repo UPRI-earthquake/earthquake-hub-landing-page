@@ -564,7 +564,6 @@ h6 {
   position: relative;
   min-height: clamp(1300px, 175vw, 1980px);
   padding: clamp(0.3rem, 1vw, 1rem) 0 clamp(1rem, 3vw, 2rem);
-  /* overflow: hidden; */
   width: 100%;
 }
 
@@ -681,6 +680,56 @@ h6 {
   height: clamp(150px, 16vw, 240px);
   object-fit: cover;
   border-radius: 4px;
+}
+
+@media (min-width: 1100px) {
+  .what-we-are__layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-rows: auto auto auto;
+    gap: clamp(1.5rem, 2.8vw, 2.8rem) clamp(2rem, 4vw, 3.5rem);
+    align-items: start;
+    min-height: auto;
+    padding: clamp(2rem, 3.5vw, 3rem) 0 clamp(2.5rem, 4vw, 3.5rem);
+  }
+
+  .what-we-are__heading {
+    grid-column: 1 / -1;
+    text-align: center;
+  }
+
+  .what-we-are__card,
+  .what-we-are__copy,
+  .what-we-are__card--mid,
+  .what-we-are__card--bottom {
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+    width: 100%;
+    min-height: clamp(220px, 18vw, 320px);
+  }
+
+  .what-we-are__copy {
+    grid-column: 1;
+  }
+
+  .what-we-are__card--mid {
+    grid-column: 2;
+  }
+
+  .what-we-are__card--bottom {
+    grid-column: 1 / -1;
+    max-width: min(980px, 92%);
+    margin: 0 auto;
+  }
+
+  .what-we-are__map-bg {
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: min(1200px, 110%);
+    opacity: 0.25;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -845,6 +894,11 @@ h6 {
 
 #station-view .content-section__title {
   display: none;
+}
+
+#station-view .content-section__inner {
+  max-width: none;
+  padding: 0;
 }
 
 .station-view {
@@ -1084,12 +1138,17 @@ h6 {
   z-index: 1;
   background: #238f33;
   border-radius: clamp(34px, 7vw, 52px) clamp(34px, 7vw, 52px) 0 0;
+  width: 100%;
+}
+
+.station-view__bottom-inner {
+  width: min(1200px, 100%);
+  margin: 0 auto;
   padding: clamp(2.4rem, 4vw, 3.2rem) clamp(1.2rem, 4vw, 3.4rem)
     clamp(1.5rem, 3vw, 2.8rem);
   display: flex;
   flex-direction: column;
   gap: clamp(2.2rem, 4vw, 3.2rem);
-  width: 100%;
 }
 
 .station-view__bottom-row {
@@ -1824,7 +1883,7 @@ h6 {
 }
 
 #come-work-with-us .content-section__inner{
-  margin: 0 0;
+  margin: 0 auto;
   width: 100%;
 }
 
@@ -2596,6 +2655,48 @@ h6 {
 
   .community__track-group .community__image:nth-child(even) {
     transform: rotate(-2deg) translateY(-3px);
+  }
+}
+
+@media (min-width: 1400px) {
+  :root {
+    --page-max: 1200px;
+    --page-wide: 1320px;
+  }
+
+  .content-section__inner {
+    max-width: var(--page-max);
+  }
+
+  .community__layout {
+    max-width: var(--page-max);
+    margin: 0 auto;
+  }
+
+  .projects-container {
+    max-width: var(--page-max);
+    margin: 0 auto;
+  }
+
+  .careers {
+    max-width: var(--page-max);
+  }
+
+  .footer__inner {
+    max-width: var(--page-wide);
+  }
+
+  .hero__body {
+    width: min(100%, var(--page-wide));
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+    padding-top: 120px;
+  }
+
+  .what-we-are__layout {
+    max-width: var(--page-wide);
+    margin: 0 auto;
   }
 }
 
