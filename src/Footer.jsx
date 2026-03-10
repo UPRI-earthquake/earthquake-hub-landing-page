@@ -1,3 +1,6 @@
+import upSeal from './assets/UP-Seal.avif'
+import upriLogo from './assets/UPRI-logo.avif'
+
 const contactGroups = [
   {
     title: 'UPRI Seismo Team',
@@ -9,6 +12,10 @@ const contactGroups = [
   },
   {
     title: 'University of the Philippines',
+    logo: {
+      src: upSeal,
+      alt: 'University of the Philippines seal',
+    },
     items: [
       {
         type: 'facebook',
@@ -20,6 +27,10 @@ const contactGroups = [
   },
   {
     title: 'UP Resilience Institute',
+    logo: {
+      src: upriLogo,
+      alt: 'UP Resilience Institute logo',
+    },
     items: [
       {
         type: 'facebook',
@@ -66,7 +77,20 @@ const Footer = () => {
               }`}
               key={group.title}
             >
-              <h2>{group.title}</h2>
+              <div className="footer__heading">
+                <h2>{group.title}</h2>
+                {group.logo ? (
+                  <img
+                    className="footer__logo"
+                    src={group.logo.src}
+                    alt={group.logo.alt}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                ) : (
+                  <span className="footer__logo footer__logo--placeholder" aria-hidden="true" />
+                )}
+              </div>
               <ul className="footer__contacts">
                 {group.items.map((item) => (
                   <li key={`${group.title}-${item.type}-${item.value}`}>

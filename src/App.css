@@ -1927,11 +1927,39 @@ h6 {
   gap: clamp(1.2rem, 2.6vw, 2.2rem) clamp(1.8rem, 3vw, 3rem);
 }
 
+.footer__heading {
+  display: grid;
+  grid-template-columns: 1fr clamp(30px, 3.4vw, 42px);
+  align-items: center;
+  column-gap: 0.65rem;
+  margin-bottom: 0.9rem;
+}
+
 .footer__column h2 {
   margin: 0 0 0.9rem;
   color: #f8f8f8;
   font-size: clamp(1.05rem, 1.3vw, 1.75rem);
   /* font-weight: 700; */
+}
+
+.footer__heading h2 {
+  margin: 0;
+  line-height: 1.2;
+  min-height: 1.2em;
+  max-height: 2.4em;
+}
+
+.footer__logo {
+  width: clamp(30px, 3.4vw, 42px);
+  height: clamp(30px, 3.4vw, 42px);
+  object-fit: contain;
+  flex-shrink: 0;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.35));
+}
+
+.footer__logo--placeholder {
+  background: transparent;
+  filter: none;
 }
 
 .footer__column--bottom-right {
