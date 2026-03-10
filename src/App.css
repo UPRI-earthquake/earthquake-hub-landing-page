@@ -1297,6 +1297,7 @@ h6 {
   border-radius: 16px;
   padding: clamp(1.8rem, 2.5vw, 2.5rem);
   width: clamp(240px, 30vw, 320px);
+  min-height: clamp(320px, 34vw, 380px);
   cursor: pointer;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   border-top: 5px solid #458039;
@@ -1314,6 +1315,10 @@ h6 {
     max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   transform-origin: center center;
   will-change: transform, opacity, width;
+}
+
+.project-card-item:not(.project-card-item--expanded) {
+  height: clamp(320px, 34vw, 380px);
 }
 
 .project-card-item:hover:not(.project-card-item--expanded) {
@@ -1360,8 +1365,10 @@ h6 {
 }
 
 .project-card-item--expanded .project-card-image-container {
-  width: clamp(56px, 8vw, 72px);
-  height: clamp(56px, 8vw, 72px);
+  width: clamp(72px, 9vw, 92px);
+  height: clamp(72px, 9vw, 92px);
+  min-width: 72px;
+  min-height: 72px;
   margin-bottom: 0;
   flex-shrink: 0;
 }
@@ -1394,6 +1401,11 @@ h6 {
     width 0.4s cubic-bezier(0.4, 0, 0.2, 1),
     height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
     margin 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.project-card-item:not(.project-card-item--expanded) .project-card-image-container {
+  min-width: 112px;
+  min-height: 112px;
 }
 
 .project-card-image {
@@ -2383,6 +2395,11 @@ h6 {
 
   .project-card-item {
     width: clamp(180px, 45%, 260px);
+    min-height: clamp(290px, 56vw, 340px);
+  }
+
+  .project-card-item:not(.project-card-item--expanded) {
+    height: clamp(290px, 56vw, 340px);
   }
 
   .project-card-item--expanded {
@@ -2497,6 +2514,11 @@ h6 {
   .project-card-item {
     width: 100%;
     max-width: 300px;
+    min-height: 300px;
+  }
+
+  .project-card-item:not(.project-card-item--expanded) {
+    height: 300px;
   }
 
   .project-card-item--hidden {
@@ -2516,9 +2538,10 @@ h6 {
   }
 
   .project-card-item--expanded .project-card-image-container {
-    width: 64px;
-    height: 64px;
-    min-width: 64px;
+    width: 72px;
+    height: 72px;
+    min-width: 72px;
+    min-height: 72px;
   }
 
   .project-card-item--expanded .project-card-title {
