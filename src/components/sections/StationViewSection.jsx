@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from "react"
 import SectionLayout from "./SectionLayout"
-import stationImage from "../../assets/station.png"
+import stationImage from "../../assets/station.avif"
 import eqInfoImage from "../../assets/eqinfo.PNG"
 import stationDataImage from "../../assets/stationdata.png"
 import stationDataFullImage from "../../assets/stationdatafull.png"
-import significantEarthquakesImage from "../../assets/significantearthquakes.PNG"
+import significantEarthquakesImage from "../../assets/significantearthquakes.avif"
 
 const StationViewSection = () => {
   const sectionRef = useRef(null)

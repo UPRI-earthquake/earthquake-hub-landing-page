@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
-import banner from './assets/HEROBG.png'
-import seismoLogo from './assets/SEISMOFAVICON.png'
-import seismologo2 from './assets/SEISMOFAVICON2.png'
+import banner from './assets/HEROBG.avif'
+import seismoLogo from './assets/SEISMOFAVICON_converted.avif'
 
 const navItems = [
   { label: 'Projects', targetId: 'projects' },
