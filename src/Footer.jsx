@@ -1,9 +1,14 @@
+import seismoLogo from './assets/SEISMOFAVICON2.png'
 import upSeal from './assets/UP-Seal.avif'
 import upriLogo from './assets/UPRI-logo.avif'
 
 const contactGroups = [
   {
     title: 'UPRI Seismo Team',
+    logo: {
+      src: seismoLogo,
+      alt: 'UPRI Seismo Team logo',
+    },
     items: [
       { type: 'facebook', value: 'Facebook' },
       { type: 'phone', value: '1234567890' },
