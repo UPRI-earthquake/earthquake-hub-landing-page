@@ -1,4 +1,4 @@
-import QQImg from "../assets/QQ-logo.png";
+import QQImg from "../assets/QQ-Logo.png";
 import seismoFavicon from "../assets/SEISMOFAVICON_converted.avif";
 import shakeTIcon from "../assets/shaketable.png";
 
