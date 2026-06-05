@@ -12,6 +12,11 @@ dist
 dist-ssr
 *.local
 
+# Local Codex files and installed skills
+.codex/
+skills/
+playwright-screenshots/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

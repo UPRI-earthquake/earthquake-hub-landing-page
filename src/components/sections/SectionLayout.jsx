@@ -1,13 +1,13 @@
-const SectionLayout = ({ id, label, variant, title, children }) => {
+const SectionLayout = ({ id, label, variant, title, className = "", children }) => {
   return (
     <section
       id={id}
-      className={`content-section content-section--${variant}`}
+      className={`content-section content-section--${variant} content-section--slide ${className}`.trim()}
       aria-label={label}
     >
       <div className="content-section__inner">
         {title ? <h2 className="content-section__title">{title}</h2> : null}
-        {children || <div className="content-section__slot" />}
+        {children}
       </div>
     </section>
   )

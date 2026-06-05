@@ -1,136 +1,168 @@
-import { useState, useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import { products } from "../../data/products"
+import useScrollReveal from "../../hooks/useScrollReveal"
 
 const ProductsSection = () => {
-  const [displayIndex, setDisplayIndex] = useState(0)
-  const [pendingIndex, setPendingIndex] = useState(null)
-  const [phase, setPhase] = useState("idle") // 'idle' | 'exit' | 'enter'
-  const [direction, setDirection] = useState("next") // 'next' | 'prev'
-  const exitTimer = useRef(null)
-  const enterTimer = useRef(null)
-
-  const navigate = (dir) => {
-    if (phase !== "idle") return
-    const next =
-      dir === "next"
-        ? (displayIndex + 1) % products.length
-        : (displayIndex - 1 + products.length) % products.length
-    setDirection(dir)
-    setPendingIndex(next)
-    setPhase("exit")
-  }
-
-  const goToIndex = (i) => {
-    if (phase !== "idle" || i === displayIndex) return
-    setDirection(i > displayIndex ? "next" : "prev")
-    setPendingIndex(i)
-    setPhase("exit")
-  }
+  const trackRef = useRef(null)
+  const [canScrollPrev, setCanScrollPrev] = useState(false)
+  const [canScrollNext, setCanScrollNext] = useState(products.length > 1)
+  const { setRevealRef, visibleItems } = useScrollReveal(3)
 
   useEffect(() => {
-    if (phase === "exit") {
-      exitTimer.current = setTimeout(() => {
-        setDisplayIndex(pendingIndex)
-        setPhase("enter")
-      }, 320)
+    const track = trackRef.current
+    if (!track) {
+      return undefined
     }
-    if (phase === "enter") {
-      enterTimer.current = setTimeout(() => {
-        setPhase("idle")
-        setPendingIndex(null)
-      }, 480)
+
+    const updateScrollState = () => {
+      const maxScrollLeft = track.scrollWidth - track.clientWidth
+      setCanScrollPrev(track.scrollLeft > 8)
+      setCanScrollNext(track.scrollLeft < maxScrollLeft - 8)
     }
+
+    updateScrollState()
+    track.addEventListener("scroll", updateScrollState, { passive: true })
+    window.addEventListener("resize", updateScrollState)
+
     return () => {
-      clearTimeout(exitTimer.current)
-      clearTimeout(enterTimer.current)
+      track.removeEventListener("scroll", updateScrollState)
+      window.removeEventListener("resize", updateScrollState)
     }
-  }, [phase, pendingIndex])
+  }, [])
 
-  const product = products[displayIndex]
+  const scrollTrack = (direction) => {
+    const track = trackRef.current
+    if (!track) {
+      return
+    }
 
-  let cardClass = "products-card"
-  if (phase === "exit") {
-    cardClass +=
-      direction === "next"
-        ? " products-card--exit-left"
-        : " products-card--exit-right"
-  } else if (phase === "enter") {
-    cardClass +=
-      direction === "next"
-        ? " products-card--enter-right"
-        : " products-card--enter-left"
+    const firstPanel = track.querySelector(".products-panel")
+    const step = firstPanel
+      ? firstPanel.getBoundingClientRect().width + 20
+      : track.clientWidth * 0.82
+
+    track.scrollBy({
+      left: direction === "next" ? step : -step,
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+        ? "auto"
+        : "smooth",
+    })
   }
 
   return (
-    <section id="products" className="products-section">
+    <section
+      id="shake-table-prototypes"
+      className="products-section motion-group motion-group--ready"
+      aria-labelledby="shake-table-prototypes-title"
+    >
       <div className="products-section__inner">
-        <h2 className="products-section__title">Products</h2>
-
-        <div className="products-viewport">
-          <div className={cardClass}>
-            <div className="products-card__desc">
-              <h3 className="products-card__name">{product.title}</h3>
-              <p className="products-card__description">{product.description}</p>
-            </div>
-
-            <div className="products-card__visual">
-              <div className="products-card__halfcircle" aria-hidden="true" />
-              <img
-                className="products-card__image"
-                src={product.images}
-                alt={product.title}
-              />
-            </div>
-          </div>
+        <div
+          ref={setRevealRef(0)}
+          data-reveal-index="0"
+          className={`products-section__header motion-reveal${visibleItems[0] ? " is-visible" : ""}`}
+          style={{ "--motion-order": 0 }}
+        >
+          <p className="products-section__eyebrow">
+            From earthquake records to physical motion
+          </p>
+          <h2
+            id="shake-table-prototypes-title"
+            className="products-section__title"
+          >
+            Shake Tables
+          </h2>
+          <p className="products-section__intro">
+            These project outputs turn seismic data into controlled motion so
+            students, researchers, and communities can see how structures
+            respond during earthquakes.
+          </p>
         </div>
 
-        <div className="products-nav">
-          <button
-            className="products-nav__btn"
-            onClick={() => navigate("prev")}
-            aria-label="Previous product"
-            disabled={phase !== "idle"}
-          >
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
-              <path
-                d="M11 3L5 9L11 15"
-                stroke="#F5F7FA"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </button>
+        <div
+          ref={setRevealRef(1)}
+          data-reveal-index="1"
+          className={`products-rail motion-reveal${visibleItems[1] ? " is-visible" : ""}`}
+          style={{ "--motion-order": 1 }}
+        >
+          <div className="products-rail__header">
+            <p className="products-rail__meta">
+              {products.length} model{products.length === 1 ? "" : "s"}
+            </p>
 
-          <div className="products-nav__dots">
-            {products.map((_, i) => (
+            <div className="products-rail__controls" aria-label="Shake table navigation">
               <button
-                key={i}
-                className={`products-nav__dot${
-                  i === displayIndex ? " products-nav__dot--active" : ""
-                }`}
-                onClick={() => goToIndex(i)}
-                aria-label={`Go to ${products[i].title}`}
-              />
-            ))}
+                type="button"
+                className="products-rail__button"
+                onClick={() => scrollTrack("prev")}
+                disabled={!canScrollPrev}
+                aria-label="Scroll shake tables backward"
+              >
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+                  <path
+                    d="M11 3L5 9L11 15"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </button>
+
+              <button
+                type="button"
+                className="products-rail__button"
+                onClick={() => scrollTrack("next")}
+                disabled={!canScrollNext}
+                aria-label="Scroll shake tables forward"
+              >
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+                  <path
+                    d="M7 3L13 9L7 15"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </button>
+            </div>
           </div>
 
-          <button
-            className="products-nav__btn"
-            onClick={() => navigate("next")}
-            aria-label="Next product"
-            disabled={phase !== "idle"}
+          <div
+            ref={(node) => {
+              trackRef.current = node
+              setRevealRef(2)(node)
+            }}
+            className={`products-showcase motion-reveal${visibleItems[2] ? " is-visible" : ""}`}
+            role="list"
+            aria-label="Shake table projects"
+            tabIndex={0}
+            data-reveal-index="2"
+            style={{ "--motion-order": 2 }}
           >
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
-              <path
-                d="M7 3L13 9L7 15"
-                stroke="#F5F7FA"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </button>
+            {products.map((product, index) => (
+              <article
+                key={product.id}
+                className={`products-panel products-panel--${index % 2 === 0 ? "light" : "dark"}`}
+                role="listitem"
+              >
+                <div className="products-panel__copy">
+                  <p className="products-panel__eyebrow">{product.category}</p>
+                  <h3 className="products-panel__title">{product.title}</h3>
+                  <p className="products-panel__description">{product.description}</p>
+                </div>
+
+                <div className="products-panel__visual">
+                  <div className="products-panel__glow" aria-hidden="true" />
+                  <img
+                    className="products-panel__image"
+                    src={product.images}
+                    alt={product.title}
+                  />
+                </div>
+              </article>
+            ))}
+          </div>
         </div>
       </div>
     </section>
