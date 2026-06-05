@@ -5,7 +5,7 @@ import upriLogo from './assets/UPRI-logo.avif'
 const importantLinks = [
   {
     label: 'Seismic Network',
-    href: 'https://earthquake.up.edu.ph/',
+    href: 'https://earthquake.science.upd.edu.ph/',
     external: true,
   },
   {

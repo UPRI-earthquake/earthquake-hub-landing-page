@@ -19,7 +19,7 @@ export const projects = [
       },
       {
         text: "Visit Website",
-        href: "https://earthquake.up.edu.ph/",
+        href: "https://earthquake.science.upd.edu.ph/",
         isInternal: false,
         variant: "secondary",
       },
