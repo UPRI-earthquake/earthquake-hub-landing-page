@@ -1,17 +1,29 @@
 import SectionLayout from "./SectionLayout"
 import useScrollReveal from "../../hooks/useScrollReveal"
 
+const memberProfileImages = import.meta.glob(
+  "../../assets/team/*/profile.{avif,webp,png,jpg,jpeg}",
+  { eager: true, import: "default" },
+)
+
 const members = [
-  { name: "Dr. Alfredo Mahar Francisco A. Lagmay", role: "UPRI Executive Director" },
-  { name: "Engr. Christopher Jeff A. Sanchez", role: "Software Engineer, Team Consultant" },
-  { name: "Engr. John Christian C. Cabang", role: "Software Engineer, Team Lead" },
-  { name: "Lyward Manuel S. Tongzon", role: "Software Engineer" },
-  { name: "Alyssa Patricia Ocampo", role: "2023-Intern" },
-  { name: "Kim Nique", role: "2024-Intern" },
-  { name: "Rebecca Yap", role: "2025-Intern" },
-  { name: "John Rhey Bayotlang", role: "2026-Intern" },
-  { name: "Samuel Chinguangco", role: "2026-Intern" },
+  { name: "Dr. Alfredo Mahar Francisco A. Lagmay", role: "UPRI Executive Director", slug: "alfredo-mahar-francisco-a-lagmay" },
+  { name: "Engr. Christopher Jeff A. Sanchez", role: "Software Engineer, Team Consultant", slug: "christopher-jeff-a-sanchez" },
+  { name: "Engr. John Christian C. Cabang", role: "Software Engineer, Team Lead", slug: "john-christian-c-cabang" },
+  { name: "Lyward Manuel S. Tongzon", role: "Software Engineer", slug: "lyward-manuel-s-tongzon" },
+  { name: "Alyssa Patricia Ocampo", role: "2023-Intern", slug: "alyssa-patricia-ocampo" },
+  { name: "Kim Nique", role: "2024-Intern", slug: "kim-nique" },
+  { name: "Rebecca Yap", role: "2025-Intern", slug: "rebecca-yap" },
+  { name: "John Rhey Bayotlang", role: "2026-Intern", slug: "john-rhey-bayotlang" },
+  { name: "Samuel Chinguangco", role: "2026-Intern", slug: "samuel-chinguangco" },
 ]
+
+const profileImageBySlug = Object.fromEntries(
+  Object.entries(memberProfileImages).map(([path, src]) => {
+    const match = path.match(/\/team\/([^/]+)\/profile\.[^/.]+$/)
+    return match ? [match[1], src] : null
+  }).filter(Boolean),
+)
 
 const projectLeader = members.find((member) => member.role === "UPRI Executive Director")
 
@@ -55,6 +67,7 @@ const splitRole = (role) => {
 
 const renderMemberCard = (member, { featured = false } = {}) => {
   const { primary, secondary } = splitRole(member.role)
+  const profileImage = profileImageBySlug[member.slug]
 
   return (
     <article
@@ -63,7 +76,18 @@ const renderMemberCard = (member, { featured = false } = {}) => {
       key={member.name}
     >
       <div className="team-card__top">
-        <div className="team-card__avatar" aria-hidden="true">{getInitials(member.name)}</div>
+        <div className="team-card__avatar" aria-hidden={profileImage ? undefined : "true"}>
+          {profileImage ? (
+            <img
+              className="team-card__avatar-image"
+              src={profileImage}
+              alt={member.name}
+              loading="lazy"
+            />
+          ) : (
+            getInitials(member.name)
+          )}
+        </div>
       </div>
 
       <div className="team-card__body">
