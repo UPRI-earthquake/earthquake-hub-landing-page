@@ -80,12 +80,21 @@ const OpportunityDialog = ({ opportunity, onClose }) => {
   const dialogRef = useRef(null)
   const closeButtonRef = useRef(null)
   const viewerStageRef = useRef(null)
+  const documentElementRef = useRef(null)
   const dragStateRef = useRef(null)
   const activePointersRef = useRef(new Map())
   const pinchStateRef = useRef(null)
   const [documentOffset, setDocumentOffset] = useState({ x: 0, y: 0 })
   const [documentZoom, setDocumentZoom] = useState(MIN_DOCUMENT_ZOOM)
+  const [baseDocumentSize, setBaseDocumentSize] = useState(null)
   const titleId = useId()
+  const materialKind = getMaterialKind(opportunity)
+
+  useEffect(() => {
+    setDocumentOffset({ x: 0, y: 0 })
+    setDocumentZoom(MIN_DOCUMENT_ZOOM)
+    setBaseDocumentSize(null)
+  }, [opportunity])
 
   useEffect(() => {
     const previousOverflow = document.body.style.overflow
@@ -157,11 +166,71 @@ const OpportunityDialog = ({ opportunity, onClose }) => {
     }
   }, [])
 
-  const materialKind = getMaterialKind(opportunity)
-  const hasDocumentTransform =
-    documentZoom !== MIN_DOCUMENT_ZOOM || documentOffset.x !== 0 || documentOffset.y !== 0
+  useEffect(() => {
+    if (materialKind !== "image") {
+      setBaseDocumentSize(null)
+      return undefined
+    }
+
+    const stage = viewerStageRef.current
+
+    if (!stage) {
+      return undefined
+    }
+
+    const updateBaseSize = () => {
+      const documentElement = documentElementRef.current
+
+      if (!documentElement) {
+        return
+      }
+
+      const { naturalWidth, naturalHeight } = documentElement
+
+      if (!naturalWidth || !naturalHeight) {
+        return
+      }
+
+      const stageRect = stage.getBoundingClientRect()
+      const nextScale = Math.min(stageRect.width / naturalWidth, stageRect.height / naturalHeight, 1)
+
+      if (!Number.isFinite(nextScale) || nextScale <= 0) {
+        setBaseDocumentSize(null)
+        return
+      }
+
+      setBaseDocumentSize({
+        width: naturalWidth * nextScale,
+        height: naturalHeight * nextScale,
+      })
+    }
+
+    updateBaseSize()
+
+    const resizeObserver = new ResizeObserver(() => {
+      updateBaseSize()
+    })
+
+    resizeObserver.observe(stage)
+    window.addEventListener("resize", updateBaseSize)
+
+    return () => {
+      resizeObserver.disconnect()
+      window.removeEventListener("resize", updateBaseSize)
+    }
+  }, [materialKind, opportunity])
+
+  const hasDocumentTransform = documentZoom !== MIN_DOCUMENT_ZOOM || documentOffset.x !== 0 || documentOffset.y !== 0
   const documentTransform = `translate(${documentOffset.x}px, ${documentOffset.y}px) scale(${documentZoom})`
-  const documentStyle = hasDocumentTransform ? { transform: documentTransform } : undefined
+  const documentStyle = {
+    ...(baseDocumentSize
+      ? {
+          width: `${baseDocumentSize.width}px`,
+          height: `${baseDocumentSize.height}px`,
+        }
+      : {}),
+    ...(hasDocumentTransform ? { transform: documentTransform } : {}),
+  }
   const zoomPercentage = `${Math.round(documentZoom * 100)}%`
 
   const getPointerDistance = () => {
@@ -339,12 +408,40 @@ const OpportunityDialog = ({ opportunity, onClose }) => {
                 />
               ) : (
                 <img
+                  ref={documentElementRef}
                   className="opportunity-dialog__image"
                   src={opportunity.materialSrc}
                   alt={opportunity.materialAlt}
                   decoding="sync"
                   draggable="false"
                   fetchPriority="high"
+                  onLoad={() => {
+                    const stage = viewerStageRef.current
+                    const documentElement = documentElementRef.current
+
+                    if (!stage || !documentElement) {
+                      return
+                    }
+
+                    const { naturalWidth, naturalHeight } = documentElement
+
+                    if (!naturalWidth || !naturalHeight) {
+                      return
+                    }
+
+                    const stageRect = stage.getBoundingClientRect()
+                    const nextScale = Math.min(stageRect.width / naturalWidth, stageRect.height / naturalHeight, 1)
+
+                    if (!Number.isFinite(nextScale) || nextScale <= 0) {
+                      setBaseDocumentSize(null)
+                      return
+                    }
+
+                    setBaseDocumentSize({
+                      width: naturalWidth * nextScale,
+                      height: naturalHeight * nextScale,
+                    })
+                  }}
                   style={documentStyle}
                 />
               )

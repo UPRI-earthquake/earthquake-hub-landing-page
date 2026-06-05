@@ -13,6 +13,8 @@ import communicationsCommitteeHeadQuakeQuest2026 from "../assets/opportunities/c
 import creativesCommitteeHeadQuakeQuest2026 from "../assets/opportunities/creatives-committee-head-quake-quest-2026.png"
 import logisticsCommitteeHeadQuakeQuest2026 from "../assets/opportunities/logistics-committee-head-quake-quest-2026.png"
 
+const APPLICATION_FORM_URL = "https://forms.gle/bV8pYXb3PL97TTqQ8"
+
 const createOpportunity = ({
   id,
   title,
@@ -33,7 +35,7 @@ const createOpportunity = ({
   materialAlt: `Official hiring poster for the ${title} role under ${project}`,
   status: "Open",
   applyLabel: "Apply",
-  applyHref: null,
+  applyHref: APPLICATION_FORM_URL,
 })
 
 export const opportunities = [
