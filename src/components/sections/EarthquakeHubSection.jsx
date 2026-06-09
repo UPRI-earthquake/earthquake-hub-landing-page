@@ -82,7 +82,7 @@ const EarthquakeHubSection = () => {
   const activeBackgroundImage = activeBeacon?.backgroundImage ?? ehubBeaconBgImage
 
   const handleClick = () => {
-    window.open('https://earthquake.science.upd.edu.ph/')
+    window.open('https://earthquake.up.edu.ph/')
   }
 
   useEffect(() => {
