@@ -4,14 +4,9 @@ import embeddedSystemsDeveloperShakeTable2026 from "../assets/opportunities/embe
 import mechanicalEngineerShakeTable2026 from "../assets/opportunities/mechanical-engineer-shake-table-2026.png"
 import backEndDeveloperSeismicNetwork2026 from "../assets/opportunities/back-end-developer-seismic-network-2026.png"
 import frontEndDeveloperSeismicNetwork2026 from "../assets/opportunities/front-end-developer-seismic-network-2026.png"
-import serverEngineerSeismicNetwork2026 from "../assets/opportunities/server-engineer-seismic-network-2026.png"
 import uiUxDesignerSeismicNetwork2026 from "../assets/opportunities/ui-ux-designer-seismic-network-2026.png"
 import humanResourceManagementHeadPublicRelations2026 from "../assets/opportunities/human-resource-management-head-public-relations-2026.png"
 import scienceCommunicatorPublicRelations2026 from "../assets/opportunities/science-communicator-public-relations-2026.png"
-import projectCoordinatorQuakeQuest2026 from "../assets/opportunities/project-coordinator-quake-quest-2026.png"
-import communicationsCommitteeHeadQuakeQuest2026 from "../assets/opportunities/communications-committee-head-quake-quest-2026.png"
-import creativesCommitteeHeadQuakeQuest2026 from "../assets/opportunities/creatives-committee-head-quake-quest-2026.png"
-import logisticsCommitteeHeadQuakeQuest2026 from "../assets/opportunities/logistics-committee-head-quake-quest-2026.png"
 
 const APPLICATION_FORM_URL = "https://forms.gle/bV8pYXb3PL97TTqQ8"
 
@@ -83,8 +78,8 @@ export const opportunities = [
     id: "back-end-developer-seismic-network-2026",
     title: "Back-end Developer",
     project: "Seismic Network Project",
-    employmentType: "Contract of Service SG 18",
-    compensation: "PHP 64,581.60",
+    employmentType: "Contract of Service SG 14–18",
+    compensation: "Up to PHP 64,581.60",
     summary:
       "Contract of Service role for the Seismic Network Project focused on APIs, data pipelines, and backend services.",
     materialSrc: backEndDeveloperSeismicNetwork2026,
@@ -93,28 +88,18 @@ export const opportunities = [
     id: "front-end-developer-seismic-network-2026",
     title: "Front-end Developer",
     project: "Seismic Network Project",
-    employmentType: "Contract of Service SG 18",
-    compensation: "PHP 64,581.60",
+    employmentType: "Contract of Service SG 14–18",
+    compensation: "Up to PHP 64,581.60",
     summary:
       "Contract of Service role for the Seismic Network Project focused on dashboards, visualization tools, and user interfaces.",
     materialSrc: frontEndDeveloperSeismicNetwork2026,
   }),
   createOpportunity({
-    id: "server-engineer-seismic-network-2026",
-    title: "Server Engineer",
-    project: "Seismic Network Project",
-    employmentType: "Contract of Service SG 18",
-    compensation: "PHP 64,581.60",
-    summary:
-      "Contract of Service role for the Seismic Network Project focused on servers, infrastructure, deployment, and system reliability.",
-    materialSrc: serverEngineerSeismicNetwork2026,
-  }),
-  createOpportunity({
     id: "ui-ux-designer-seismic-network-2026",
     title: "UI/UX Designer",
     project: "Seismic Network Project",
-    employmentType: "Contract of Service SG 18",
-    compensation: "PHP 64,581.60",
+    employmentType: "Contract of Service SG 14–18",
+    compensation: "Up to PHP 64,581.60",
     summary:
       "Contract of Service role for the Seismic Network Project focused on user-centered interfaces, prototypes, and data usability.",
     materialSrc: uiUxDesignerSeismicNetwork2026,
@@ -138,45 +123,5 @@ export const opportunities = [
     summary:
       "Contract of Service role for Public Relations focused on people coordination, documentation, and team support.",
     materialSrc: humanResourceManagementHeadPublicRelations2026,
-  }),
-  createOpportunity({
-    id: "project-coordinator-quake-quest-2026",
-    title: "Project Coordinator",
-    project: "Quake Quest Project",
-    employmentType: "Contract of Service SG 11",
-    compensation: "PHP 38,046.00",
-    summary:
-      "Contract of Service role for the Quake Quest Project focused on project planning, team coordination, and competition delivery.",
-    materialSrc: projectCoordinatorQuakeQuest2026,
-  }),
-  createOpportunity({
-    id: "communications-committee-head-quake-quest-2026",
-    title: "Communications Committee Head",
-    project: "Quake Quest Project",
-    employmentType: "Contract of Service SG 10",
-    compensation: "PHP 32,300.40",
-    summary:
-      "Contract of Service role for the Quake Quest Project focused on participant communications, partnerships, and promotions.",
-    materialSrc: communicationsCommitteeHeadQuakeQuest2026,
-  }),
-  createOpportunity({
-    id: "creatives-committee-head-quake-quest-2026",
-    title: "Creatives Committee Head",
-    project: "Quake Quest Project",
-    employmentType: "Contract of Service SG 10",
-    compensation: "PHP 32,300.40",
-    summary:
-      "Contract of Service role for the Quake Quest Project focused on creative direction, visual materials, and campaign assets.",
-    materialSrc: creativesCommitteeHeadQuakeQuest2026,
-  }),
-  createOpportunity({
-    id: "logistics-committee-head-quake-quest-2026",
-    title: "Logistics Committee Head",
-    project: "Quake Quest Project",
-    employmentType: "Contract of Service SG 10",
-    compensation: "PHP 32,300.40",
-    summary:
-      "Contract of Service role for the Quake Quest Project focused on event logistics, registration, operations, and participant support.",
-    materialSrc: logisticsCommitteeHeadQuakeQuest2026,
   }),
 ]
