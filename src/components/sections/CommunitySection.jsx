@@ -3,7 +3,7 @@ import SectionLayout from "./SectionLayout"
 
 // Import all images in the carousel directory with eager loading to ensure they're available when the carousel is rendered.
 const carouselImageModules = import.meta.glob(
-  "../../assets/carousel/*.{png,PNG,jpg,JPG,jpeg,JPEG,webp,WEBP,avif,AVIF}",
+  "../../assets/community/carousel/*.{png,PNG,jpg,JPG,jpeg,JPEG,webp,WEBP,avif,AVIF}",
   { eager: true, import: "default" },
 )
 

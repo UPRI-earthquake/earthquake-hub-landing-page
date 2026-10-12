@@ -275,7 +275,7 @@
   background-image:
     linear-gradient(rgba(186, 242, 188, 0.028) 1px, transparent 1px),
     linear-gradient(90deg, rgba(186, 242, 188, 0.024) 1px, transparent 1px),
-    url("../assets/PublicationBG.png");
+    url("../assets/publications/background.png");
   background-size: 72px 72px, 72px 72px, cover;
 }
 

@@ -1,6 +1,6 @@
-import QQImg from "../assets/QQ-Logo.png";
-import ehubFavicon from "../assets/ehub-favicon.png";
-import shakeTIcon from "../assets/shaketable.png";
+import QQImg from "../assets/projects/quake-quest-logo.png";
+import ehubFavicon from "../assets/projects/earthquake-hub-logo.png";
+import shakeTIcon from "../assets/projects/shake-table.png";
 
 export const projects = [
   {

@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
-import upSeal from '../../assets/UP-Seal.avif'
-import upriLogo from '../../assets/UPRI-logo.avif'
-import showcaseSlide01 from '../../assets/hero-showcase/slide-01.jpg'
-import showcaseSlide02 from '../../assets/hero-showcase/slide-02.jpg'
-import showcaseSlide03 from '../../assets/hero-showcase/slide-03.jpg'
+import upSeal from '../../assets/brand/up-seal.avif'
+import upriLogo from '../../assets/brand/upri-logo.avif'
+import showcaseSlide01 from '../../assets/hero/slide-01.jpg'
+import showcaseSlide02 from '../../assets/hero/slide-02.jpg'
+import showcaseSlide03 from '../../assets/hero/slide-03.jpg'
 import { scrollToSection } from '../../utils/scroll'
 
 const navItems = [

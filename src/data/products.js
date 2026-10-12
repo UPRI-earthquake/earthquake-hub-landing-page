@@ -1,5 +1,5 @@
-import singleST from "../assets/SingleAxisST.avif";
-import doubleAxisST from "../assets/2AxisST.avif";
+import singleST from "../assets/shake-table/single-axis.avif";
+import doubleAxisST from "../assets/shake-table/two-axis.avif";
 
 export const products = [
   {

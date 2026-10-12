@@ -428,7 +428,7 @@ h6 {
 }
 
 #publications {
-  background-image: url("./assets/PublicationBG.png");
+  background-image: url("./assets/publications/background.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

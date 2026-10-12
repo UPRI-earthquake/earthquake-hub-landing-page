@@ -1,6 +1,6 @@
 import useScrollReveal from "../../hooks/useScrollReveal"
 import SectionLayout from "./SectionLayout"
-import phMapImage from "../../assets/ph.svg"
+import phMapImage from "../../assets/location/philippines.svg"
 
 const WhatWeAreSection = () => {
   const { setRevealRef, visibleItems } = useScrollReveal(4, {

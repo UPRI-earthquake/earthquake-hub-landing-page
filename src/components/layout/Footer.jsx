@@ -1,6 +1,6 @@
 import useScrollReveal from "../../hooks/useScrollReveal"
-import upSeal from '../../assets/UP-Seal.avif'
-import upriLogo from '../../assets/UPRI-logo.avif'
+import upSeal from '../../assets/brand/up-seal.avif'
+import upriLogo from '../../assets/brand/upri-logo.avif'
 
 const importantLinks = [
   {
