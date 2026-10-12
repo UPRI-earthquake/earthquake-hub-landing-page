@@ -89,7 +89,7 @@
 
 .team__contributors-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.9rem;
 }
 
@@ -149,7 +149,13 @@
   font-size: 1.08rem;
 }
 
-.team-card__body h3 {
+.team-card__body {
+  display: grid;
+  gap: 0.375rem;
+  align-content: start;
+}
+
+.team-card__body h4 {
   margin: 0;
   color: #ffffff;
   font-size: clamp(1rem, 1.3vw, 1.14rem);
@@ -159,7 +165,7 @@
 .team-card__role {
   display: grid;
   gap: 0.18rem;
-  margin: 0.55rem 0 0;
+  margin: 0;
   color: rgba(247, 251, 245, 0.74);
   font-size: 0.92rem;
   line-height: 1.45;
@@ -169,7 +175,7 @@
   color: rgba(183, 240, 141, 0.8);
 }
 
-.team-card--featured .team-card__body h3 {
+.team-card--featured .team-card__body h4 {
   font-size: clamp(1.14rem, 1.55vw, 1.35rem);
 }
 
@@ -237,7 +243,7 @@
     width: 3.7rem;
   }
 
-  .team-card__body h3 {
+  .team-card__body h4 {
     font-size: 1rem;
   }
 }

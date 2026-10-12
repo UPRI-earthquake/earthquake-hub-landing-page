@@ -1,6 +1,6 @@
 import SectionLayout from "./SectionLayout"
 import useScrollReveal from "../../hooks/useScrollReveal"
-import { members } from "../../data/team"
+import { members, teamGroups } from "../../data/team"
 
 const memberProfileImages = import.meta.glob(
   "../../assets/team/*/profile.{avif,webp,png,jpg,jpeg}",
@@ -14,27 +14,18 @@ const profileImageBySlug = Object.fromEntries(
   }).filter(Boolean),
 )
 
-const projectLeaders = members.filter((member) => member.group === "leadership")
-const projectDevelopers = members.filter((member) => member.group === "developers")
-const interns = members.filter((member) => member.group === "interns")
-
 const getInitials = (name) =>
   name
     .replace(/^(Dr\.|Engr\.)\s+/i, "")
     .split(/\s+/)
     .filter(Boolean)
-    .slice(0, 2)
+    .filter((_, index, parts) => index === 0 || index === parts.length - 1)
     .map((part) => part[0])
     .join("")
     .toUpperCase()
 
-const formatRole = (role) =>
-  role
-    .replace(/(\d{4})-(intern)/gi, (_, year, label) => `${year} ${label}`)
-    .replace(/\bintern\b/gi, "Intern")
-
 const splitRole = (role) => {
-  const parts = formatRole(role).split(",").map((part) => part.trim()).filter(Boolean)
+  const parts = role.split(",").map((part) => part.trim()).filter(Boolean)
 
   return {
     primary: parts[0] ?? "",
@@ -68,7 +59,7 @@ const renderMemberCard = (member, { featured = false } = {}) => {
       </div>
 
       <div className="team-card__body">
-        <h3>{member.name}</h3>
+        <h4>{member.name}</h4>
         <p className="team-card__role">
           <span>{primary}</span>
           {secondary ? <span className="team-card__detail">{secondary}</span> : null}
@@ -79,7 +70,7 @@ const renderMemberCard = (member, { featured = false } = {}) => {
 }
 
 const TeamSection = () => {
-  const { setRevealRef, visibleItems } = useScrollReveal(4)
+  const { setRevealRef, visibleItems } = useScrollReveal(teamGroups.length + 1)
 
   return (
     <SectionLayout id="team" label="Team" variant="dark">
@@ -93,65 +84,40 @@ const TeamSection = () => {
           <header className="team__header">
             <h2 className="team__title">Meet the Team</h2>
             <p className="team__subtitle">
-              Leadership, project development, and internship support behind SEISMO.
+              Leadership, project teams, and administration behind SEISMO.
             </p>
           </header>
 
           <div className="team__roster">
-            <section
-              ref={setRevealRef(1)}
-              data-reveal-index="1"
-              className={`team__group motion-reveal${visibleItems[1] ? " is-visible" : ""}`}
-              style={{ "--motion-order": 1 }}
-              aria-labelledby="team-leadership-heading"
-            >
-              <div className="team__group-header">
-                <h3 id="team-leadership-heading" className="team__group-title">Leadership</h3>
-                <p className="team__group-copy">Research direction and oversight.</p>
-              </div>
+            {teamGroups.map((group, index) => {
+              const groupMembers = members.filter((member) => member.group === group.id)
+              const revealIndex = index + 1
+              const isLeadership = group.id === "leadership"
 
-              <div className="team__leadership-grid" role="list" aria-label="Leadership team">
-                {projectLeaders.map((member) => renderMemberCard(member, { featured: true }))}
-              </div>
-            </section>
+              return (
+                <section
+                  key={group.id}
+                  ref={setRevealRef(revealIndex)}
+                  data-reveal-index={revealIndex}
+                  className={`team__group motion-reveal${visibleItems[revealIndex] ? " is-visible" : ""}`}
+                  style={{ "--motion-order": revealIndex }}
+                  aria-labelledby={`team-${group.id}-heading`}
+                >
+                  <div className="team__group-header">
+                    <h3 id={`team-${group.id}-heading`} className="team__group-title">{group.label}</h3>
+                    {group.description ? <p className="team__group-copy">{group.description}</p> : null}
+                  </div>
 
-            <section
-              ref={setRevealRef(2)}
-              data-reveal-index="2"
-              className={`team__group motion-reveal${visibleItems[2] ? " is-visible" : ""}`}
-              style={{ "--motion-order": 2 }}
-              aria-labelledby="team-developers-heading"
-            >
-              <div className="team__group-header">
-                <h3 id="team-developers-heading" className="team__group-title">Project Developers</h3>
-                <p className="team__group-copy">
-                  Active engineering and delivery support.
-                </p>
-              </div>
-
-              <div className="team__contributors-grid" role="list" aria-label="Project developers">
-                {projectDevelopers.map((member) => renderMemberCard(member))}
-              </div>
-            </section>
-
-            <section
-              ref={setRevealRef(3)}
-              data-reveal-index="3"
-              className={`team__group motion-reveal${visibleItems[3] ? " is-visible" : ""}`}
-              style={{ "--motion-order": 3 }}
-              aria-labelledby="team-contributors-heading"
-            >
-              <div className="team__group-header">
-                <h3 id="team-contributors-heading" className="team__group-title">Intern Contributors</h3>
-                <p className="team__group-copy">
-                  Internship contributors across recent cohorts.
-                </p>
-              </div>
-
-              <div className="team__contributors-grid" role="list" aria-label="Intern contributors">
-                {interns.map((member) => renderMemberCard(member))}
-              </div>
-            </section>
+                  <div
+                    className={isLeadership ? "team__leadership-grid" : "team__contributors-grid"}
+                    role="list"
+                    aria-label={group.label}
+                  >
+                    {groupMembers.map((member) => renderMemberCard(member, { featured: isLeadership }))}
+                  </div>
+                </section>
+              )
+            })}
           </div>
         </div>
       </div>
