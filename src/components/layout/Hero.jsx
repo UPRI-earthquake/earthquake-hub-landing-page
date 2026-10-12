@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
-import upSeal from './assets/UP-Seal.avif'
-import upriLogo from './assets/UPRI-logo.avif'
-import showcaseSlide01 from './assets/hero-showcase/slide-01.jpg'
-import showcaseSlide02 from './assets/hero-showcase/slide-02.jpg'
-import showcaseSlide03 from './assets/hero-showcase/slide-03.jpg'
-import { scrollToSection } from './utils/scroll'
+import upSeal from '../../assets/UP-Seal.avif'
+import upriLogo from '../../assets/UPRI-logo.avif'
+import showcaseSlide01 from '../../assets/hero-showcase/slide-01.jpg'
+import showcaseSlide02 from '../../assets/hero-showcase/slide-02.jpg'
+import showcaseSlide03 from '../../assets/hero-showcase/slide-03.jpg'
+import { scrollToSection } from '../../utils/scroll'
 
 const navItems = [
   { label: 'Projects', targetId: 'projects' },

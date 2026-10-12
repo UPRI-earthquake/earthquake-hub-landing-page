@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { prefersReducedMotion } from './utils/scroll'
+import { prefersReducedMotion } from '../../utils/scroll'
 
 const ScrollToTopButton = () => {
   const [isVisible, setIsVisible] = useState(false)

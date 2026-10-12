@@ -1,64 +1,15 @@
+import useScrollReveal from "../../hooks/useScrollReveal"
 import SectionLayout from "./SectionLayout"
-import { useEffect, useRef, useState } from "react"
+import { useState } from "react"
 import { projects } from "../../data/projects"
 import { scrollToSection } from "../../utils/scroll"
 
 const ProjectsSection = () => {
-  const revealRefs = useRef([])
-  const [visibleItems, setVisibleItems] = useState({})
+  const { setRevealRef, visibleItems } = useScrollReveal(3, {
+    threshold: 0.18,
+    respectReducedMotion: false,
+  })
   const [selectedId, setSelectedId] = useState(projects[0]?.id ?? null)
-
-  useEffect(() => {
-    const nodes = revealRefs.current.filter(Boolean)
-    if (nodes.length === 0) {
-      return undefined
-    }
-
-    if (!("IntersectionObserver" in window)) {
-      setVisibleItems(
-        nodes.reduce((acc, _, index) => {
-          acc[index] = true
-          return acc
-        }, {}),
-      )
-      return undefined
-    }
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) {
-            return
-          }
-
-          const index = Number(entry.target.getAttribute("data-reveal-index"))
-          if (Number.isNaN(index)) {
-            return
-          }
-
-          setVisibleItems((prev) => {
-            if (prev[index]) {
-              return prev
-            }
-
-            return { ...prev, [index]: true }
-          })
-
-          observer.unobserve(entry.target)
-        })
-      },
-      {
-        threshold: [0.18],
-        rootMargin: "0px 0px -8% 0px",
-      },
-    )
-
-    nodes.forEach((node) => observer.observe(node))
-
-    return () => {
-      observer.disconnect()
-    }
-  }, [])
 
   const handleProjectSelect = (projectId) => {
     setSelectedId(projectId)
@@ -126,9 +77,7 @@ const ProjectsSection = () => {
     >
       <div className="projects-showcase projects-showcase--ready">
         <div
-          ref={(node) => {
-            revealRefs.current[0] = node
-          }}
+          ref={setRevealRef(0)}
           data-reveal-index="0"
           className={`projects-showcase__header projects-showcase__reveal projects-showcase__reveal--intro ${visibleItems[0] ? "projects-showcase__reveal--visible" : ""}`}
         >
@@ -140,9 +89,7 @@ const ProjectsSection = () => {
 
         <div className="projects-showcase__body">
           <div
-            ref={(node) => {
-              revealRefs.current[1] = node
-            }}
+            ref={setRevealRef(1)}
             data-reveal-index="1"
             className={`projects-selector projects-showcase__reveal projects-showcase__reveal--selector ${visibleItems[1] ? "projects-showcase__reveal--visible" : ""}`}
             role="tablist"
@@ -180,9 +127,7 @@ const ProjectsSection = () => {
             <article
               key={selectedProject.id}
               id={`project-panel-${selectedProject.id}`}
-              ref={(node) => {
-                revealRefs.current[2] = node
-              }}
+              ref={setRevealRef(2)}
               data-reveal-index="2"
               className={`projects-spotlight projects-showcase__reveal projects-showcase__reveal--spotlight ${visibleItems[2] ? "projects-showcase__reveal--visible" : ""}`}
               role="tabpanel"

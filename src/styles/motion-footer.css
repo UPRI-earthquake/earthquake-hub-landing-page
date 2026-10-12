@@ -1,0 +1,255 @@
+/* Final motion pass */
+
+:root {
+  --motion-ease-smooth: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --motion-duration-section: 720ms;
+  --motion-duration-fast: 240ms;
+  --motion-distance-section: 28px;
+  --motion-stagger-step: 70ms;
+}
+
+.motion-group .motion-reveal {
+  opacity: 1;
+  transform: none;
+}
+
+.motion-group.motion-group--ready .motion-reveal {
+  opacity: 0;
+  transform: translate3d(0, var(--motion-distance, var(--motion-distance-section)), 0);
+  transition:
+    opacity var(--motion-duration, var(--motion-duration-section)) ease,
+    transform var(--motion-duration, var(--motion-duration-section)) var(--motion-ease, var(--motion-ease-smooth));
+  transition-delay: calc(var(--motion-order, 0) * var(--motion-stagger-step) + var(--motion-delay, 0ms));
+}
+
+.motion-group.motion-group--ready .motion-reveal.is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero__caption > *,
+  .hero__visual,
+  .hero__field-note,
+  .hero__explore {
+    animation: heroEntrance 720ms var(--motion-ease-smooth) both;
+  }
+
+  .hero__caption > *:nth-child(1) {
+    animation-delay: 80ms;
+  }
+
+  .hero__caption > *:nth-child(2) {
+    animation-delay: 140ms;
+  }
+
+  .hero__caption > *:nth-child(3) {
+    animation-delay: 200ms;
+  }
+
+  .hero__caption > *:nth-child(4) {
+    animation-delay: 260ms;
+  }
+
+  .hero__visual {
+    animation-delay: 180ms;
+  }
+
+  .hero__field-note {
+    animation-delay: 320ms;
+  }
+
+  .hero__explore {
+    animation-delay: 380ms;
+  }
+}
+
+@keyframes heroEntrance {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 24px, 0) scale(0.985);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+.hero__cta,
+.hero__explore-btn,
+.hero__showcase-dot,
+.projects-selector__item,
+.projects-spotlight__link,
+.community__action,
+.publication-entry__card,
+.team-card,
+.opportunity-card,
+.footer__link-list a,
+.footer__social-list a,
+.footer .footer__partner-link {
+  transition-timing-function: var(--motion-ease-smooth);
+}
+
+.team__group,
+.publications-year-group,
+.careers__carousel,
+.careers__empty,
+.products-rail,
+.products-showcase,
+.footer__identity,
+.footer__nav,
+.footer__connect,
+.footer__bottom-inner {
+  --motion-distance: 32px;
+}
+
+.team-card {
+  transition:
+    transform var(--motion-duration-fast) ease,
+    border-color var(--motion-duration-fast) ease,
+    box-shadow var(--motion-duration-fast) ease,
+    background-color var(--motion-duration-fast) ease;
+}
+
+.team-card:hover,
+.team-card:focus-within {
+  transform: translateY(-4px);
+  box-shadow: 0 28px 52px rgba(0, 0, 0, 0.22);
+}
+
+.publication-entry {
+  transition:
+    transform var(--motion-duration-fast) ease,
+    opacity var(--motion-duration-fast) ease;
+}
+
+.publication-entry:hover,
+.publication-entry:focus-visible {
+  transform: translateY(-3px);
+}
+
+.opportunity-card {
+  transition:
+    transform 280ms var(--motion-ease-smooth),
+    border-color var(--motion-duration-fast) ease,
+    box-shadow 280ms ease;
+}
+
+.opportunity-card:hover,
+.opportunity-card:focus-within {
+  transform: translateY(-4px);
+  box-shadow: 0 30px 64px rgba(0, 0, 0, 0.3);
+}
+
+#shake-table-prototypes .products-showcase.motion-reveal {
+  transition-delay: calc(var(--motion-order, 0) * var(--motion-stagger-step) + 80ms);
+}
+
+#shake-table-prototypes .products-panel__image {
+  transition: transform 420ms var(--motion-ease-smooth), filter 320ms ease;
+}
+
+#shake-table-prototypes .products-panel:hover .products-panel__image,
+#shake-table-prototypes .products-panel:focus-within .products-panel__image {
+  transform: translateY(-4px) scale(1.01);
+}
+
+#earthquake-hub .ehub__active-note {
+  animation: ehubNoteIn 260ms var(--motion-ease-smooth);
+}
+
+#earthquake-hub .ehub__beacon,
+#earthquake-hub .ehub__cta,
+#earthquake-hub .ehub__docs-link {
+  transition-timing-function: var(--motion-ease-smooth);
+}
+
+.footer__link-list a,
+.footer__social-list a {
+  transition:
+    color var(--motion-duration-fast) ease,
+    transform var(--motion-duration-fast) ease,
+    text-decoration-color var(--motion-duration-fast) ease;
+}
+
+.footer__link-list a:hover,
+.footer__link-list a:focus-visible,
+.footer__social-list a:hover,
+.footer__social-list a:focus-visible {
+  transform: translateX(2px);
+}
+
+@keyframes ehubNoteIn {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 12px, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .motion-group.motion-group--ready .motion-reveal,
+  .motion-group.motion-group--ready .motion-reveal.is-visible,
+  .hero__caption > *,
+  .hero__visual,
+  .hero__field-note,
+  .hero__explore {
+    opacity: 1;
+    transform: none;
+    animation: none;
+    transition: none;
+  }
+
+  .team-card:hover,
+  .team-card:focus-within,
+  .publication-entry:hover,
+  .publication-entry:focus-visible,
+  .opportunity-card:hover,
+  .opportunity-card:focus-within,
+  #shake-table-prototypes .products-panel:hover .products-panel__image,
+  #shake-table-prototypes .products-panel:focus-within .products-panel__image,
+  .footer__link-list a:hover,
+  .footer__link-list a:focus-visible,
+  .footer__social-list a:hover,
+  .footer__social-list a:focus-visible {
+    transform: none;
+  }
+
+  #earthquake-hub .ehub__active-note {
+    animation: none;
+  }
+}
+
+/* Footer depth fix */
+
+.footer {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer__inner {
+  min-height: auto;
+  align-content: start;
+  padding-top: clamp(2.4rem, 4.5vw, 3.6rem);
+  padding-bottom: clamp(1.35rem, 2.6vw, 2rem);
+}
+
+.footer__bottom {
+  margin-top: 0;
+}
+
+.footer__bottom-inner {
+  min-height: auto;
+}
+
+@media (max-width: 900px) {
+  .footer__inner {
+    padding-top: clamp(2rem, 7vw, 2.8rem);
+    padding-bottom: clamp(1.1rem, 4vw, 1.6rem);
+  }
+}

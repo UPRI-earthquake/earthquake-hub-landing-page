@@ -1,22 +1,11 @@
 import SectionLayout from "./SectionLayout"
 import useScrollReveal from "../../hooks/useScrollReveal"
+import { members } from "../../data/team"
 
 const memberProfileImages = import.meta.glob(
   "../../assets/team/*/profile.{avif,webp,png,jpg,jpeg}",
   { eager: true, import: "default" },
 )
-
-const members = [
-  { name: "Dr. Alfredo Mahar Francisco A. Lagmay", role: "UPRI Executive Director", slug: "alfredo-mahar-francisco-a-lagmay" },
-  { name: "Engr. Christopher Jeff A. Sanchez", role: "Software Engineer, Team Consultant", slug: "christopher-jeff-a-sanchez" },
-  { name: "Engr. John Christian C. Cabang", role: "Software Engineer, Team Lead", slug: "john-christian-c-cabang" },
-  { name: "Lyward Manuel S. Tongzon", role: "Software Engineer", slug: "lyward-manuel-s-tongzon" },
-  { name: "Alyssa Patricia Ocampo", role: "2023-Intern", slug: "alyssa-patricia-ocampo" },
-  { name: "Kim Nique", role: "2024-Intern", slug: "kim-nique" },
-  { name: "Rebecca Yap", role: "2025-Intern", slug: "rebecca-yap" },
-  { name: "John Rhey Bayotlang", role: "2026-Intern", slug: "john-rhey-bayotlang" },
-  { name: "Samuel Chinguangco", role: "2026-Intern", slug: "samuel-chinguangco" },
-]
 
 const profileImageBySlug = Object.fromEntries(
   Object.entries(memberProfileImages).map(([path, src]) => {
@@ -25,21 +14,9 @@ const profileImageBySlug = Object.fromEntries(
   }).filter(Boolean),
 )
 
-const projectLeader = members.find((member) => member.role === "UPRI Executive Director")
-
-const projectDevelopers = members.filter(
-  (member) =>
-    member !== projectLeader &&
-    (
-      member.role.toLowerCase().includes("team lead") ||
-      member.role.toLowerCase().includes("team consultant") ||
-      member.name === "Lyward Manuel S. Tongzon"
-    )
-)
-
-const interns = members.filter(
-  (member) => member !== projectLeader && !projectDevelopers.includes(member)
-)
+const projectLeaders = members.filter((member) => member.group === "leadership")
+const projectDevelopers = members.filter((member) => member.group === "developers")
+const interns = members.filter((member) => member.group === "interns")
 
 const getInitials = (name) =>
   name
@@ -134,7 +111,7 @@ const TeamSection = () => {
               </div>
 
               <div className="team__leadership-grid" role="list" aria-label="Leadership team">
-                {projectLeader ? renderMemberCard(projectLeader, { featured: true }) : null}
+                {projectLeaders.map((member) => renderMemberCard(member, { featured: true }))}
               </div>
             </section>
 

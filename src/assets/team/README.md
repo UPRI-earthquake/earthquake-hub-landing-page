@@ -17,6 +17,6 @@ One directory per member:
 - `john-rhey-bayotlang/`
 - `samuel-chinguangco/`
 
-Current note:
-- `src/components/sections/TeamSection.jsx` still falls back to initials only.
-- This directory structure is ready for the next step when portraits are wired into the UI.
+Add or update the matching entry in `src/data/team.js`. Set its `group` to
+`leadership`, `developers`, or `interns`. A matching portrait is shown when
+present; otherwise the card displays initials.

@@ -11,6 +11,7 @@ const useScrollReveal = (
   {
     threshold = 0.18,
     rootMargin = "0px 0px -8% 0px",
+    respectReducedMotion = true,
   } = {},
 ) => {
   const revealRefs = useRef([])
@@ -20,7 +21,7 @@ const useScrollReveal = (
     }
 
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)")
-    if (mediaQuery.matches || !("IntersectionObserver" in window)) {
+    if ((respectReducedMotion && mediaQuery.matches) || !("IntersectionObserver" in window)) {
       return createVisibleMap(itemCount)
     }
 
@@ -34,7 +35,7 @@ const useScrollReveal = (
     }
 
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)")
-    if (mediaQuery.matches || !("IntersectionObserver" in window)) {
+    if ((respectReducedMotion && mediaQuery.matches) || !("IntersectionObserver" in window)) {
       return undefined
     }
 
@@ -72,7 +73,7 @@ const useScrollReveal = (
     return () => {
       observer.disconnect()
     }
-  }, [itemCount, rootMargin, threshold])
+  }, [itemCount, rootMargin, threshold, respectReducedMotion])
 
   const setRevealRef = (index) => (node) => {
     revealRefs.current[index] = node

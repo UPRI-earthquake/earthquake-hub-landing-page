@@ -1,0 +1,127 @@
+/* Shake Table Prototypes section */
+#shake-table-prototypes.products-section {
+  background:
+    radial-gradient(circle at 16% 18%, rgba(183, 240, 141, 0.16), transparent 24rem),
+    radial-gradient(circle at 90% 22%, rgba(70, 199, 216, 0.12), transparent 22rem),
+    linear-gradient(180deg, #07150c 0%, #102817 54%, #08140c 100%);
+}
+
+#shake-table-prototypes .products-section__inner {
+  width: min(100%, 1180px);
+  gap: clamp(1.8rem, 3vw, 2.6rem);
+}
+
+#shake-table-prototypes .products-section__header {
+  max-width: 52rem;
+}
+
+#shake-table-prototypes .products-section__eyebrow {
+  color: #b7f08d;
+}
+
+#shake-table-prototypes .products-section__title {
+  color: #f7fbf5;
+}
+
+#shake-table-prototypes .products-section__intro {
+  color: rgba(239, 249, 238, 0.86);
+}
+
+#shake-table-prototypes .products-viewport {
+  border: 1px solid rgba(202, 242, 190, 0.16);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.32);
+}
+
+#shake-table-prototypes .products-card {
+  display: grid;
+  grid-template-columns: minmax(320px, 0.82fr) minmax(420px, 1fr);
+  min-height: clamp(430px, 42vw, 560px);
+  background: rgba(247, 251, 245, 0.05);
+}
+
+#shake-table-prototypes .products-card__desc {
+  flex-basis: auto;
+  padding: clamp(1.8rem, 3.8vw, 3.6rem);
+  background:
+    linear-gradient(180deg, rgba(247, 251, 245, 0.96), rgba(228, 238, 225, 0.94));
+  color: #0b1c0d;
+}
+
+#shake-table-prototypes .products-card__label {
+  color: #28672e;
+  font-weight: 800;
+}
+
+#shake-table-prototypes .products-card__name {
+  color: #07150c;
+  font-size: clamp(2rem, 4vw, 3.45rem);
+  font-weight: 800;
+  letter-spacing: -0.045em;
+}
+
+#shake-table-prototypes .products-card__description {
+  color: #28342b;
+  font-size: clamp(0.98rem, 1.15vw, 1.08rem);
+  font-weight: 400;
+}
+
+#shake-table-prototypes .products-card__visual {
+  background:
+    linear-gradient(rgba(183, 240, 141, 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(183, 240, 141, 0.045) 1px, transparent 1px),
+    radial-gradient(circle at 68% 45%, rgba(183, 240, 141, 0.2), transparent 18rem),
+    linear-gradient(145deg, #15391e, #08150c);
+  background-size: 42px 42px, 42px 42px, auto, auto;
+}
+
+#shake-table-prototypes .products-card__halfcircle {
+  right: -18%;
+  width: clamp(280px, 58%, 480px);
+  background:
+    radial-gradient(circle, rgba(247, 251, 245, 0.78), rgba(183, 240, 141, 0.22) 58%, transparent 60%);
+}
+
+#shake-table-prototypes .products-card__image {
+  max-width: min(92%, 520px);
+  max-height: 92%;
+  filter:
+    drop-shadow(0 28px 42px rgba(0, 0, 0, 0.38))
+    drop-shadow(0 8px 16px rgba(0, 0, 0, 0.24));
+}
+
+#shake-table-prototypes .products-nav__btn {
+  border: 1px solid rgba(202, 242, 190, 0.18);
+  background: rgba(247, 251, 245, 0.08);
+}
+
+#shake-table-prototypes .products-nav__btn:hover:not(:disabled),
+#shake-table-prototypes .products-nav__btn:focus-visible:not(:disabled) {
+  background: rgba(183, 240, 141, 0.18);
+}
+
+@media (max-width: 900px) {
+  #shake-table-prototypes .products-card {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  #shake-table-prototypes .products-card__visual {
+    min-height: clamp(260px, 56vw, 390px);
+    order: -1;
+  }
+
+  #shake-table-prototypes .products-card__desc {
+    padding: clamp(1.35rem, 5vw, 2rem);
+  }
+}
+
+@media (max-width: 600px) {
+  #shake-table-prototypes .products-card__name {
+    font-size: clamp(1.9rem, 10vw, 2.8rem);
+  }
+
+  #shake-table-prototypes .products-card__image {
+    max-width: 96%;
+  }
+
+}
+

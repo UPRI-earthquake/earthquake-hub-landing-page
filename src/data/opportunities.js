@@ -8,6 +8,7 @@ import uiUxDesignerSeismicNetwork2026 from "../assets/opportunities/ui-ux-design
 import humanResourceManagementHeadPublicRelations2026 from "../assets/opportunities/human-resource-management-head-public-relations-2026.png"
 import scienceCommunicatorPublicRelations2026 from "../assets/opportunities/science-communicator-public-relations-2026.png"
 
+// Review each posting's status and application destination when editing roles.
 const APPLICATION_FORM_URL = "https://forms.gle/bV8pYXb3PL97TTqQ8"
 
 const createOpportunity = ({
@@ -18,6 +19,8 @@ const createOpportunity = ({
   compensation,
   summary,
   materialSrc,
+  status,
+  applyHref,
 }) => ({
   id,
   title,
@@ -28,9 +31,9 @@ const createOpportunity = ({
   materialSrc,
   materialType: "image",
   materialAlt: `Official hiring poster for the ${title} role under ${project}`,
-  status: "Open",
+  status,
   applyLabel: "Apply",
-  applyHref: APPLICATION_FORM_URL,
+  applyHref,
 })
 
 export const opportunities = [
@@ -43,6 +46,8 @@ export const opportunities = [
     summary:
       "Contract of Service role for the Shake Table Project focused on electrical design, power distribution, and system commissioning.",
     materialSrc: electricalEngineerShakeTable2026,
+    status: "open",
+    applyHref: APPLICATION_FORM_URL,
   }),
   createOpportunity({
     id: "electronics-controls-engineer-shake-table-2026",
@@ -53,6 +58,8 @@ export const opportunities = [
     summary:
       "Contract of Service role supporting the Shake Table Project through electronics and controls work.",
     materialSrc: electronicsControlsEngineerShakeTable2026,
+    status: "open",
+    applyHref: APPLICATION_FORM_URL,
   }),
   createOpportunity({
     id: "embedded-systems-developer-shake-table-2026",
@@ -63,6 +70,8 @@ export const opportunities = [
     summary:
       "Contract of Service role for the Shake Table Project focused on embedded software, control logic, and hardware integration.",
     materialSrc: embeddedSystemsDeveloperShakeTable2026,
+    status: "open",
+    applyHref: APPLICATION_FORM_URL,
   }),
   createOpportunity({
     id: "mechanical-engineer-shake-table-2026",
@@ -73,6 +82,8 @@ export const opportunities = [
     summary:
       "Contract of Service role for the Shake Table Project focused on mechanical design review, fabrication support, and system testing.",
     materialSrc: mechanicalEngineerShakeTable2026,
+    status: "open",
+    applyHref: APPLICATION_FORM_URL,
   }),
   createOpportunity({
     id: "back-end-developer-seismic-network-2026",
@@ -83,6 +94,8 @@ export const opportunities = [
     summary:
       "Contract of Service role for the Seismic Network Project focused on APIs, data pipelines, and backend services.",
     materialSrc: backEndDeveloperSeismicNetwork2026,
+    status: "open",
+    applyHref: APPLICATION_FORM_URL,
   }),
   createOpportunity({
     id: "front-end-developer-seismic-network-2026",
@@ -93,6 +106,8 @@ export const opportunities = [
     summary:
       "Contract of Service role for the Seismic Network Project focused on dashboards, visualization tools, and user interfaces.",
     materialSrc: frontEndDeveloperSeismicNetwork2026,
+    status: "open",
+    applyHref: APPLICATION_FORM_URL,
   }),
   createOpportunity({
     id: "ui-ux-designer-seismic-network-2026",
@@ -103,6 +118,8 @@ export const opportunities = [
     summary:
       "Contract of Service role for the Seismic Network Project focused on user-centered interfaces, prototypes, and data usability.",
     materialSrc: uiUxDesignerSeismicNetwork2026,
+    status: "open",
+    applyHref: APPLICATION_FORM_URL,
   }),
   createOpportunity({
     id: "science-communicator-public-relations-2026",
@@ -113,6 +130,8 @@ export const opportunities = [
     summary:
       "Contract of Service role for Public Relations focused on science communication, storytelling, and community-facing content.",
     materialSrc: scienceCommunicatorPublicRelations2026,
+    status: "open",
+    applyHref: APPLICATION_FORM_URL,
   }),
   createOpportunity({
     id: "human-resource-management-head-public-relations-2026",
@@ -123,5 +142,7 @@ export const opportunities = [
     summary:
       "Contract of Service role for Public Relations focused on people coordination, documentation, and team support.",
     materialSrc: humanResourceManagementHeadPublicRelations2026,
+    status: "open",
+    applyHref: APPLICATION_FORM_URL,
   }),
 ]

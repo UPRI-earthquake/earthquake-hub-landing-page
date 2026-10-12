@@ -1,60 +1,12 @@
-import { useEffect, useRef, useState } from "react"
+import useScrollReveal from "../../hooks/useScrollReveal"
 import SectionLayout from "./SectionLayout"
 import phMapImage from "../../assets/ph.svg"
 
 const WhatWeAreSection = () => {
-  const revealRefs = useRef([])
-  const [visibleItems, setVisibleItems] = useState({})
-
-  useEffect(() => {
-    const nodes = revealRefs.current.filter(Boolean)
-    if (nodes.length === 0) {
-      return undefined
-    }
-
-    if (!("IntersectionObserver" in window)) {
-      setVisibleItems(
-        nodes.reduce((acc, _, index) => {
-          acc[index] = true
-          return acc
-        }, {}),
-      )
-      return undefined
-    }
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) {
-            return
-          }
-
-          const index = Number(entry.target.getAttribute("data-reveal-index"))
-          if (Number.isNaN(index)) {
-            return
-          }
-
-          setVisibleItems((prev) => {
-            if (prev[index]) {
-              return prev
-            }
-            return { ...prev, [index]: true }
-          })
-          observer.unobserve(entry.target)
-        })
-      },
-      {
-        threshold: [0.2],
-        rootMargin: "0px 0px -8% 0px",
-      },
-    )
-
-    nodes.forEach((node) => observer.observe(node))
-
-    return () => {
-      observer.disconnect()
-    }
-  }, [])
+  const { setRevealRef, visibleItems } = useScrollReveal(4, {
+    threshold: 0.2,
+    respectReducedMotion: false,
+  })
 
   return (
     <SectionLayout
@@ -76,9 +28,7 @@ const WhatWeAreSection = () => {
         </div>
 
         <h2
-          ref={(node) => {
-            revealRefs.current[0] = node
-          }}
+          ref={setRevealRef(0)}
           data-reveal-index="0"
           className={`what-we-are__heading what-we-are__reveal what-we-are__reveal--heading ${visibleItems[0] ? "what-we-are__reveal--visible" : ""}`}
         >
@@ -87,9 +37,7 @@ const WhatWeAreSection = () => {
         </h2>
 
         <div
-          ref={(node) => {
-            revealRefs.current[1] = node
-          }}
+          ref={setRevealRef(1)}
           data-reveal-index="1"
           className={`what-we-are__copy what-we-are__card what-we-are__reveal what-we-are__reveal--card-1 ${visibleItems[1] ? "what-we-are__reveal--visible" : ""}`}
         >
@@ -116,9 +64,7 @@ const WhatWeAreSection = () => {
         </div> */}
 
         <div
-          ref={(node) => {
-            revealRefs.current[2] = node
-          }}
+          ref={setRevealRef(2)}
           data-reveal-index="2"
           className={`what-we-are__card what-we-are__card--mid what-we-are__reveal what-we-are__reveal--card-2 ${visibleItems[2] ? "what-we-are__reveal--visible" : ""}`}
         >
@@ -132,9 +78,7 @@ const WhatWeAreSection = () => {
         </div>
 
         <div
-          ref={(node) => {
-            revealRefs.current[3] = node
-          }}
+          ref={setRevealRef(3)}
           data-reveal-index="3"
           className={`what-we-are__card what-we-are__card--bottom what-we-are__reveal what-we-are__reveal--card-3 ${visibleItems[3] ? "what-we-are__reveal--visible" : ""}`}
         >

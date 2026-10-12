@@ -1,13 +1,13 @@
 import { lazy, Suspense } from "react"
-import ComeWorkWithUsSection from "./components/sections/ComeWorkWithUsSection"
-import ProjectsSection from "./components/sections/ProjectsSection"
-import TeamSection from "./components/sections/TeamSection"
-import WhatWeAreSection from "./components/sections/WhatWeAreSection"
+import ComeWorkWithUsSection from "../sections/ComeWorkWithUsSection"
+import ProjectsSection from "../sections/ProjectsSection"
+import TeamSection from "../sections/TeamSection"
+import WhatWeAreSection from "../sections/WhatWeAreSection"
 
-const EarthquakeHubSection = lazy(() => import("./components/sections/EarthquakeHubSection"))
-const ProductsSection = lazy(() => import("./components/sections/ProductsSection"))
-const CommunitySection = lazy(() => import("./components/sections/CommunitySection"))
-const PublicationsSection = lazy(() => import("./components/sections/PublicationsSection"))
+const EarthquakeHubSection = lazy(() => import("../sections/EarthquakeHubSection"))
+const ProductsSection = lazy(() => import("../sections/ProductsSection"))
+const CommunitySection = lazy(() => import("../sections/CommunitySection"))
+const PublicationsSection = lazy(() => import("../sections/PublicationsSection"))
 
 const SectionFallback = ({ id, label, variant = "light" }) => (
   <section

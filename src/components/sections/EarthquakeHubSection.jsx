@@ -11,72 +11,73 @@ import eqInfoImage from "../../assets/eqinfo.PNG"
 import stationDataImage from "../../assets/stationdata.png"
 import stationDataFullImage from "../../assets/stationdatafull.png"
 
+// Centralized copy for each interactive hotspot.
+// Keep keys aligned with `setSelected("<key>")` calls and CSS modifiers:
+// `.ehub__beacon--<key>`.
+const beaconContent = {
+  eventList: {
+    label: "Event list",
+    title: "Recent earthquake list",
+    body:
+      "Scan recent earthquake events, compare entries quickly, and move from the list into a selected event detail workflow.",
+    backgroundImage: ehubBeaconEventListBgImage,
+    modifier: "event-list",
+    buttonLabel: "Event list feature",
+  },
+  stationList: {
+    label: "Station list",
+    title: "Station list view",
+    body:
+      "Switch from earthquake events to deployed seismic stations across the network, then choose a station for local context and live readings.",
+    backgroundImage: ehubBeaconStationListBgImage,
+    modifier: "station-list",
+    buttonLabel: "Station list feature",
+  },
+  station: {
+    label: "Station popup",
+    title: "Station popup",
+    body:
+      "Open a deployed seismic station from the map to inspect station information and its live waveform readout.",
+    backgroundImage: ehubBeaconStationBgImage,
+    modifier: "station",
+    buttonLabel: "Station popup feature",
+  },
+  eventPopup: {
+    label: "Event popup",
+    title: "Event popup",
+    body:
+      "Select an earthquake on the map to preview magnitude, location, depth, and timing before opening deeper event intelligence.",
+    backgroundImage: ehubBeaconEventBgImage,
+    modifier: "event-popup",
+    buttonLabel: "Event popup feature",
+  },
+  layers: {
+    label: "Map controls",
+    title: "Map controls",
+    body:
+      "Use map controls and layers to switch context while keeping earthquakes, stations, and geography in view.",
+    backgroundImage: ehubBeaconControlsBgImage,
+    modifier: "layers",
+    buttonLabel: "Map controls feature",
+  },
+  legend: {
+    label: "Legend panel",
+    title: "Legend panel",
+    body:
+      "Read stations, faults, boundaries, and earthquake depth colors directly beside the active map.",
+    backgroundImage: ehubBeaconLegendBgImage,
+    modifier: "legend",
+    buttonLabel: "Legend panel feature",
+  },
+}
+
+
 const EarthquakeHubSection = () => {
   const sectionRef = useRef(null)
   const bottomRowRefs = useRef([])
   const [selected, setSelected] = useState(null)
   const [isVisible, setIsVisible] = useState(false)
   const [visibleBottomRows, setVisibleBottomRows] = useState({})
-
-  // Centralized copy for each interactive hotspot.
-  // Keep keys aligned with `setSelected("<key>")` calls and CSS modifiers:
-  // `.ehub__beacon--<key>`.
-  const beaconContent = {
-    eventList: {
-      label: "Event list",
-      title: "Recent earthquake list",
-      body:
-        "Scan recent earthquake events, compare entries quickly, and move from the list into a selected event detail workflow.",
-      backgroundImage: ehubBeaconEventListBgImage,
-      modifier: "event-list",
-      buttonLabel: "Event list feature",
-    },
-    stationList: {
-      label: "Station list",
-      title: "Station list view",
-      body:
-        "Switch from earthquake events to deployed seismic stations across the network, then choose a station for local context and live readings.",
-      backgroundImage: ehubBeaconStationListBgImage,
-      modifier: "station-list",
-      buttonLabel: "Station list feature",
-    },
-    station: {
-      label: "Station popup",
-      title: "Station popup",
-      body:
-        "Open a deployed seismic station from the map to inspect station information and its live waveform readout.",
-      backgroundImage: ehubBeaconStationBgImage,
-      modifier: "station",
-      buttonLabel: "Station popup feature",
-    },
-    eventPopup: {
-      label: "Event popup",
-      title: "Event popup",
-      body:
-        "Select an earthquake on the map to preview magnitude, location, depth, and timing before opening deeper event intelligence.",
-      backgroundImage: ehubBeaconEventBgImage,
-      modifier: "event-popup",
-      buttonLabel: "Event popup feature",
-    },
-    layers: {
-      label: "Map controls",
-      title: "Map controls",
-      body:
-        "Use map controls and layers to switch context while keeping earthquakes, stations, and geography in view.",
-      backgroundImage: ehubBeaconControlsBgImage,
-      modifier: "layers",
-      buttonLabel: "Map controls feature",
-    },
-    legend: {
-      label: "Legend panel",
-      title: "Legend panel",
-      body:
-        "Read stations, faults, boundaries, and earthquake depth colors directly beside the active map.",
-      backgroundImage: ehubBeaconLegendBgImage,
-      modifier: "legend",
-      buttonLabel: "Legend panel feature",
-    },
-  }
 
   const activeBeacon = selected ? beaconContent[selected] : null
   const activeBackgroundImage = activeBeacon?.backgroundImage ?? ehubBeaconBgImage
