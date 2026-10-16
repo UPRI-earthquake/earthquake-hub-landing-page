@@ -3,15 +3,15 @@ import uiUxDesignerSeismicNetwork2026 from "../assets/opportunities/ui-ux-design
 import scienceCommunicatorPublicRelations2026 from "../assets/opportunities/science-communicator-public-relations-2026.png"
 
 // Update this link when the application form changes. Each active role uses it below.
-const APPLICATION_FORM_URL = "https://forms.gle/bV8pYXb3PL97TTqQ8"
+const APPLICATION_FORM_URL = "https://forms.gle/qgTkKda7vqGTaZXw6"
 
 export const opportunities = [
   createOpportunity({
     id: "ui-ux-designer-seismic-network-2026",
     title: "UI/UX Designer",
     project: "Seismic Network Project",
-    employmentType: "Contract of Service SG 14–18",
-    compensation: "Up to PHP 64,581.60",
+    employmentType: "Contract of Service SG 15",
+    compensation: "PHP 50,613.60",
     summary:
       "Contract of Service role for the Seismic Network Project focused on user-centered interfaces, prototypes, and data usability.",
     materialSrc: uiUxDesignerSeismicNetwork2026,
