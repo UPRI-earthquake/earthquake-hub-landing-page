@@ -1,6 +1,6 @@
 import { createOpportunity } from "./opportunity"
-import uiUxDesignerSeismicNetwork2026 from "../assets/opportunities/ui-ux-designer-seismic-network-2026.png"
-import scienceCommunicatorPublicRelations2026 from "../assets/opportunities science-communicator-public-relations-2026.png"
+import uiUxDesignerSeismicNetwork2026 from "../assets/opportunities/UPRI Hiring - UI_UX DESIGNER - Seismic Network.png"
+import scienceCommunicatorPublicRelations2026 from "../assets/opportunities/UPRI Hiring - SCIENCE COMMUNICATOR  - Public Relations and Management Updated.png"
 import engineeringLogisticsMaterialsAide2026 from "../assets/opportunities/UPRI-Hiring-Office-Aide-Engineering-Logistics-Materials-Aide-2026.png"
 import electricalEngineeringTechnicalAide2026 from "../assets/opportunities/Upri-Hiring-Electrical-Engineering-Technical-Aide-2026.png"
 import mechanicalFabricationAssemblyAide2026 from "../assets/opportunities/Upri-Hiring-Mechanical-Fabrication-Assembly-Aide-2026.png"
