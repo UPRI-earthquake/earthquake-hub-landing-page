@@ -1,9 +1,9 @@
 import { createOpportunity } from "./opportunity"
-import uiUxDesignerSeismicNetwork2026 from "../assets/opportunities/UPRI Hiring - UI_UX DESIGNER - Seismic Network.png"
-import scienceCommunicatorPublicRelations2026 from "../assets/opportunities/UPRI Hiring - SCIENCE COMMUNICATOR  - Public Relations and Management Updated.png"
-import engineeringLogisticsMaterialsAide2026 from "../assets/opportunities/UPRI Hiring - Office Aide - Engineering Logistics & Materials Aide.png"
-import electricalEngineeringTechnicalAide2026 from "../assets/opportunities/UPRI Hiring -  Electrical & Engineering Technical Aide.png"
-import mechanicalFabricationAssemblyAide2026 from "../assets/opportunities/UPRI Hiring - Mechanical Fabrication & Assembly Aide.png"
+import uiUxDesignerSeismicNetwork2026 from "../assets/opportunities/UPRI-Hiring-UI-UX-Designer-Seismic-Network-2026.png"
+import scienceCommunicatorPublicRelations2026 from "../assets/opportunities/UPRI-Hiring-Science-Communicator-Public-Relations-and-Management-2026.png"
+import engineeringLogisticsMaterialsAide2026 from "../assets/opportunities/UPRI-Hiring-Office-Aide-Engineering-Logistics-Materials-Aide-2026.png"
+import electricalEngineeringTechnicalAide2026 from "../assets/opportunities/Upri-Hiring-Electrical-Engineering-Technical-Aide-2026.png"
+import mechanicalFabricationAssemblyAide2026 from "../assets/opportunities/Upri-Hiring-Mechanical-Fabrication-Assembly-Aide-2026.png"
 
 // Update this link when the application form changes. Each active role uses it below.
 const APPLICATION_FORM_URL = "https://forms.gle/qgTkKda7vqGTaZXw6"  
