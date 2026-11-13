@@ -7,7 +7,7 @@ export const members = [
   { name: "Geraldine L. Mosquera", role: "Admin Officer", slug: "geraldine-l-mosquera", group: "administration" },
   { name: "Jhelyn M. Bensurto", role: "Human Resource Management", slug: "jhelyn-m-bensurto", group: "administration" },
   { name: "Engr. Shankar Vembu Aky V. Alcantara", role: "Mechanical Engineer", slug: "shankar-vembu-aky-v-alcantara", group: "shake-table" },
-  { name: "Engr. James Henry D. Dolojan", role: "Mechanical Engineer", slug: "james-henry-d-dolojan", group: "shake-table" },
+  { name: "James Henry D. Dolojan", role: "Mechanical Engineer", slug: "james-henry-d-dolojan", group: "shake-table" },
   { name: "Kenny Gene Robert C. Selotan", role: "Electronics/Controls Engineer", slug: "kenny-gene-robert-c-selotan", group: "shake-table" },
   { name: "Engr. John Ace F. Viola", role: "Electronics/Controls Engineer", slug: "john-ace-f-viola", group: "shake-table" },
   { name: "Honneluv T. Labanan", role: "Frontend Developer", slug: "honneluv-t-labanan", group: "seismic-network" },
